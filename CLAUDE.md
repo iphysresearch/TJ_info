@@ -308,6 +308,10 @@ python scripts/validate-talk.py
 
 The site now follows the LIGO Papers page design philosophy:
 
+**Style Reference Link:**
+- LIGO Papers page: [https://pnp.ligo.org/ppcomm/Papers.html](https://pnp.ligo.org/ppcomm/Papers.html)
+- LIGO Papers 页面（样式参考链接）：[https://pnp.ligo.org/ppcomm/Papers.html](https://pnp.ligo.org/ppcomm/Papers.html)
+
 **Visual Characteristics:**
 - White background throughout
 - Navy blue (#000080) for links and borders
