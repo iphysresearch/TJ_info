@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const typeFilter = document.getElementById('type-filter');
     const searchInput = document.getElementById('search-input');
     const exportBtn = document.getElementById('export-bibtex');
+    const toggleDoiBtn = document.getElementById('toggle-doi');
 
     if (table) {
         // Populate year filter
@@ -35,6 +36,19 @@ document.addEventListener('DOMContentLoaded', function() {
             searchInput.addEventListener('input', filterTable);
         }
 
+        // DOI toggle functionality
+        if (toggleDoiBtn) {
+            let doiVisible = false;
+            toggleDoiBtn.addEventListener('click', function() {
+                doiVisible = !doiVisible;
+                const doiLinks = document.querySelectorAll('.doi-link');
+                doiLinks.forEach(link => {
+                    link.style.display = doiVisible ? 'inline' : 'none';
+                });
+                toggleDoiBtn.textContent = doiVisible ? 'Hide DOI' : 'Show DOI';
+            });
+        }
+
         // Sorting functionality
         const headers = table.querySelectorAll('th[data-sort]');
         headers.forEach(header => {
@@ -55,13 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const talksSearchInput = document.querySelector('.talks-controls #search-input');
 
     if (talksYearFilter || talksSearchInput) {
-        const talkCards = document.querySelectorAll('.talk-card');
+        const talkItems = document.querySelectorAll('.talk-item');
 
         // Populate year filter for talks
         if (talksYearFilter) {
             const years = new Set();
-            talkCards.forEach(card => {
-                const year = card.getAttribute('data-year');
+            talkItems.forEach(item => {
+                const year = item.getAttribute('data-year');
                 if (year) years.add(year);
             });
 
@@ -127,19 +141,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function filterTalks() {
         const yearValue = talksYearFilter ? talksYearFilter.value : '';
         const searchValue = talksSearchInput ? talksSearchInput.value.toLowerCase() : '';
-        const talkCards = document.querySelectorAll('.talk-card');
+        const talkItems = document.querySelectorAll('.talk-item');
 
-        talkCards.forEach(card => {
-            const year = card.getAttribute('data-year');
-            const text = card.textContent.toLowerCase();
+        talkItems.forEach(item => {
+            const year = item.getAttribute('data-year');
+            const text = item.textContent.toLowerCase();
 
             const yearMatch = !yearValue || year === yearValue;
             const searchMatch = !searchValue || text.includes(searchValue);
 
             if (yearMatch && searchMatch) {
-                card.style.display = '';
+                item.style.display = '';
             } else {
-                card.style.display = 'none';
+                item.style.display = 'none';
             }
         });
     }

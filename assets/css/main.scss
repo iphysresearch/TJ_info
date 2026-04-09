@@ -9,10 +9,10 @@
 
 body {
     font-family: $font-family;
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-    color: $text-color;
-    background-color: $background-color;
+    font-size: $font-size;
+    line-height: $line-height;
+    color: $text;
+    background-color: $background;
 }
 
 // Container
@@ -22,12 +22,11 @@ body {
     padding: 0 $spacing-md;
 }
 
-// Header
+// Header - Simple LIGO style
 .site-header {
-    background-color: $primary-color;
-    color: white;
+    background-color: $background;
     padding: $spacing-md 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $text;
 
     .header-content {
         display: flex;
@@ -44,7 +43,7 @@ body {
             display: flex;
             align-items: center;
             text-decoration: none;
-            color: white;
+            color: $text;
         }
 
         .logo-image {
@@ -53,7 +52,7 @@ body {
         }
 
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 14pt;
             font-weight: bold;
         }
     }
@@ -64,48 +63,42 @@ body {
         gap: $spacing-md;
 
         a {
-            color: white;
+            color: $link;
             text-decoration: none;
-            padding: $spacing-xs $spacing-sm;
-            border-radius: 4px;
-            transition: background-color 0.3s;
 
-            &:hover, &.active {
-                background-color: rgba(255, 255, 255, 0.2);
+            &:hover {
+                text-decoration: underline;
             }
         }
     }
 }
 
-// Footer
+// Footer - Minimal
 .site-footer {
-    background-color: $accent-color;
+    background-color: $background;
     padding: $spacing-lg 0;
-    margin-top: $spacing-xl;
-    border-top: 1px solid $border-color;
+    margin-top: $spacing-lg;
+    border-top: 1px solid $text;
+    text-align: center;
 
     .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: $spacing-md;
+        font-size: $font-size;
     }
 
     .footer-logo-image {
         height: 30px;
+        margin-bottom: $spacing-sm;
     }
 
     .footer-info {
-        text-align: center;
+        margin: $spacing-sm 0;
 
         p {
             margin: $spacing-xs 0;
-            font-size: 0.9rem;
         }
 
         a {
-            color: $primary-color;
+            color: $link;
             text-decoration: none;
 
             &:hover {
@@ -115,15 +108,15 @@ body {
     }
 
     .footer-links {
-        display: flex;
-        gap: $spacing-md;
+        margin-top: $spacing-sm;
 
         a {
-            color: $text-color;
+            color: $link;
             text-decoration: none;
+            margin: 0 $spacing-sm;
 
             &:hover {
-                color: $primary-color;
+                text-decoration: underline;
             }
         }
     }
@@ -135,126 +128,64 @@ main {
     padding: $spacing-lg 0;
 }
 
-// Hero section
-.hero {
-    background: linear-gradient(135deg, $primary-color 0%, $hover-color 100%);
-    color: white;
-    padding: $spacing-xl 0;
-    text-align: center;
+// Simple homepage
+.home-intro {
     margin-bottom: $spacing-lg;
 
     h1 {
-        font-size: 2.5rem;
-        margin-bottom: $spacing-sm;
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-        margin-bottom: $spacing-lg;
-        opacity: 0.9;
-    }
-
-    .hero-buttons {
-        display: flex;
-        gap: $spacing-md;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-}
-
-// Buttons
-.btn {
-    display: inline-block;
-    padding: $spacing-sm $spacing-md;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-    border: none;
-    cursor: pointer;
-
-    &.btn-primary {
-        background-color: white;
-        color: $primary-color;
-
-        &:hover {
-            background-color: $accent-color;
-        }
-    }
-
-    &.btn-secondary {
-        background-color: transparent;
-        color: white;
-        border: 2px solid white;
-
-        &:hover {
-            background-color: white;
-            color: $primary-color;
-        }
-    }
-}
-
-// Home sections
-.home-section {
-    margin-bottom: $spacing-xl;
-
-    h2 {
-        color: $primary-color;
+        font-size: 18pt;
         margin-bottom: $spacing-md;
-        font-size: 2rem;
     }
 
     p {
-        font-size: 1.1rem;
-        line-height: 1.8;
+        margin-bottom: $spacing-sm;
+    }
+
+    .home-links {
+        margin-top: $spacing-md;
+
+        a {
+            color: $link;
+            text-decoration: none;
+            margin-right: $spacing-md;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 
-.quick-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: $spacing-md;
-    margin-top: $spacing-md;
+// Typography
+h1 {
+    font-size: 16pt;
+    margin-bottom: $spacing-md;
 }
 
-.link-card {
-    background-color: $accent-color;
-    padding: $spacing-md;
-    border-radius: 8px;
-    border: 1px solid $border-color;
-    transition: transform 0.3s, box-shadow 0.3s;
+h2 {
+    font-size: 14pt;
+    margin-bottom: $spacing-sm;
+    margin-top: $spacing-lg;
+}
+
+p {
+    margin-bottom: $spacing-sm;
+}
+
+a {
+    color: $link;
+    text-decoration: underline;
 
     &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    h3 {
-        color: $primary-color;
-        margin-bottom: $spacing-sm;
-    }
-
-    p {
-        margin-bottom: $spacing-sm;
-        font-size: 0.95rem;
-    }
-
-    a {
-        color: $primary-color;
         text-decoration: none;
-        font-weight: 500;
-
-        &:hover {
-            text-decoration: underline;
-        }
     }
 }
 
-// Publications
+// Publications controls - Simple
 .publications-controls {
+    margin-bottom: $spacing-md;
     display: flex;
     gap: $spacing-md;
-    margin-bottom: $spacing-md;
     flex-wrap: wrap;
     align-items: center;
 
@@ -264,65 +195,74 @@ main {
         gap: $spacing-xs;
 
         label {
-            font-weight: 500;
+            font-weight: normal;
         }
 
         select, input[type="text"] {
+            font-family: $font-family;
+            font-size: $font-size;
             padding: $spacing-xs $spacing-sm;
-            border: 1px solid $border-color;
-            border-radius: 4px;
-            font-size: 0.95rem;
+            border: 1px solid $text;
         }
 
         input[type="text"] {
-            min-width: 250px;
+            min-width: 200px;
+        }
+    }
+
+    button {
+        font-family: $font-family;
+        font-size: $font-size;
+        padding: $spacing-xs $spacing-sm;
+        border: 1px solid $text;
+        background-color: $background;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $hover;
         }
     }
 }
 
+// LIGO-style table
 .table-responsive {
     overflow-x: auto;
-    margin-bottom: $spacing-lg;
 }
 
 .publications-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
-
-    th, td {
-        padding: $spacing-sm;
-        text-align: left;
-        border-bottom: 1px solid $border-color;
-    }
+    border: 2px solid $border;
+    font-size: $font-size;
 
     th {
-        background-color: $primary-color;
-        color: white;
-        font-weight: 600;
+        background-color: $table-header;
+        padding: $spacing-xs $spacing-sm;
+        border: 2px solid $border;
+        text-align: left;
+        font-weight: bold;
         cursor: pointer;
-        user-select: none;
 
         &:hover {
-            background-color: $hover-color;
-        }
-
-        &[data-sort]::after {
-            content: ' ⇅';
-            opacity: 0.5;
+            background-color: darken($table-header, 5%);
         }
     }
 
-    tbody tr {
-        transition: background-color 0.2s;
+    td {
+        padding: $spacing-xs $spacing-sm;
+        border: 1px solid $border;
+    }
 
-        &:hover {
-            background-color: $accent-color;
-        }
+    tbody tr:nth-child(even) {
+        background-color: $table-alt-row;
+    }
+
+    tbody tr:hover {
+        background-color: $hover;
     }
 
     a {
-        color: $primary-color;
+        color: $link;
         text-decoration: none;
 
         &:hover {
@@ -332,102 +272,23 @@ main {
 
     .links-cell {
         white-space: nowrap;
-    }
 
-    .link-badge {
-        display: inline-block;
-        padding: 2px 8px;
-        margin-right: 4px;
-        background-color: $primary-color;
-        color: white;
-        border-radius: 3px;
-        font-size: 0.85rem;
-        text-decoration: none;
-
-        &:hover {
-            background-color: $hover-color;
-            text-decoration: none;
+        a {
+            margin-right: $spacing-sm;
         }
     }
 }
 
-// Publication detail
-.publication-detail, .talk-detail {
-    h1 {
-        color: $primary-color;
-        margin-bottom: $spacing-md;
-    }
-
-    .publication-meta, .talk-meta {
-        background-color: $accent-color;
-        padding: $spacing-md;
-        border-radius: 8px;
-        margin-bottom: $spacing-md;
-
-        .meta-item {
-            margin-bottom: $spacing-sm;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            strong {
-                color: $primary-color;
-            }
-        }
-
-        .authors-list {
-            list-style: none;
-            margin-top: $spacing-xs;
-
-            li {
-                margin-bottom: $spacing-xs;
-            }
-        }
-
-        .affiliation {
-            color: #666;
-            font-size: 0.9rem;
-        }
-    }
-
-    .publication-links, .talk-links {
-        display: flex;
-        gap: $spacing-sm;
-        margin-bottom: $spacing-md;
-        flex-wrap: wrap;
-    }
-
-    .abstract {
-        margin-bottom: $spacing-md;
-
-        h2 {
-            color: $primary-color;
-            margin-bottom: $spacing-sm;
-        }
-
-        p {
-            line-height: 1.8;
-        }
-    }
+// DOI toggle button
+.doi-toggle {
+    margin-left: $spacing-md;
 }
 
-// Talks
-.talks-section {
-    margin-bottom: $spacing-xl;
-
-    .talk-type-heading {
-        color: $primary-color;
-        margin-bottom: $spacing-md;
-        padding-bottom: $spacing-xs;
-        border-bottom: 2px solid $primary-color;
-    }
-}
-
+// Talks - Simple list style
 .talks-controls {
+    margin-bottom: $spacing-md;
     display: flex;
     gap: $spacing-md;
-    margin-bottom: $spacing-md;
     flex-wrap: wrap;
     align-items: center;
 
@@ -437,107 +298,75 @@ main {
         gap: $spacing-xs;
 
         label {
-            font-weight: 500;
+            font-weight: normal;
         }
 
         select, input[type="text"] {
+            font-family: $font-family;
+            font-size: $font-size;
             padding: $spacing-xs $spacing-sm;
-            border: 1px solid $border-color;
-            border-radius: 4px;
-            font-size: 0.95rem;
+            border: 1px solid $text;
         }
 
         input[type="text"] {
-            min-width: 250px;
+            min-width: 200px;
         }
     }
 }
 
-.talks-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: $spacing-md;
+.talks-section {
+    margin-bottom: $spacing-lg;
+
+    .talk-type-heading {
+        font-size: 14pt;
+        margin-bottom: $spacing-md;
+        border-bottom: 1px solid $text;
+        padding-bottom: $spacing-xs;
+    }
 }
 
-.talk-card {
-    background-color: white;
-    border: 1px solid $border-color;
-    border-radius: 8px;
-    padding: $spacing-md;
-    transition: transform 0.3s, box-shadow 0.3s;
+.talks-list {
+    list-style: none;
+    padding: 0;
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+    li {
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-md;
+        border-bottom: 1px solid lighten($text, 70%);
 
-    .talk-card-header {
-        margin-bottom: $spacing-sm;
-
-        h3 {
-            margin-bottom: $spacing-xs;
-
-            a {
-                color: $primary-color;
-                text-decoration: none;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-
-        .talk-date {
-            color: #666;
-            font-size: 0.9rem;
+        &:last-child {
+            border-bottom: none;
         }
     }
 
-    .talk-card-body {
-        margin-bottom: $spacing-sm;
+    .talk-title {
+        font-weight: bold;
+        margin-bottom: $spacing-xs;
 
-        .talk-speaker {
-            margin-bottom: $spacing-xs;
-
-            strong {
-                color: $text-color;
-            }
-
-            .affiliation {
-                display: block;
-                color: #666;
-                font-size: 0.9rem;
-            }
-        }
-
-        .talk-event {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: $spacing-xs;
-        }
-
-        .talk-abstract {
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-    }
-
-    .talk-card-footer {
-        display: flex;
-        gap: $spacing-xs;
-        flex-wrap: wrap;
-
-        .link-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background-color: $primary-color;
-            color: white;
-            border-radius: 4px;
-            font-size: 0.85rem;
+        a {
+            color: $link;
             text-decoration: none;
 
             &:hover {
-                background-color: $hover-color;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .talk-meta {
+        font-size: $font-size;
+        color: $text;
+        margin-bottom: $spacing-xs;
+    }
+
+    .talk-links {
+        a {
+            color: $link;
+            text-decoration: none;
+            margin-right: $spacing-md;
+
+            &:hover {
+                text-decoration: underline;
             }
         }
     }
@@ -557,38 +386,31 @@ main {
         }
     }
 
-    .hero {
-        h1 {
-            font-size: 1.8rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1rem;
-        }
-    }
-
     .publications-controls {
         flex-direction: column;
         align-items: stretch;
 
         .filter-group {
-            flex-direction: column;
-            align-items: stretch;
-
             input[type="text"] {
                 min-width: 100%;
             }
         }
     }
 
-    .talks-grid {
-        grid-template-columns: 1fr;
+    .talks-controls {
+        flex-direction: column;
+        align-items: stretch;
+
+        .filter-group {
+            input[type="text"] {
+                min-width: 100%;
+            }
+        }
     }
 
     .site-footer {
         .footer-content {
             flex-direction: column;
-            text-align: center;
         }
     }
 }

@@ -22,7 +22,7 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 
 **Technology Stack:**
 - **Static Site Generator**: Hugo (extended version)
-- **Styling**: Custom SCSS with Taiji/ICTP-AP branding (#8c0000 primary color)
+- **Styling**: Custom SCSS with LIGO-inspired minimal academic design
 - **Deployment**: GitHub Pages via GitHub Actions
 - **Validation**: Python scripts for YAML schema checking
 - **Data Format**: YAML frontmatter in Markdown files
@@ -40,7 +40,7 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 
 **技术栈：**
 - **静态站点生成器**：Hugo（扩展版本）
-- **样式**：自定义SCSS，采用太极/ICTP-AP品牌色（主色#8c0000）
+- **样式**：自定义SCSS，采用LIGO风格的简约学术设计
 - **部署**：通过GitHub Actions部署到GitHub Pages
 - **验证**：用于YAML模式检查的Python脚本
 - **数据格式**：Markdown文件中的YAML前置元数据
@@ -68,10 +68,11 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 ### Design Philosophy
 
 1. **Simplicity First**: Minimal dependencies, straightforward structure
-2. **Community-Driven**: Easy contribution workflow via GitHub
-3. **Data Quality**: Automated validation prevents errors
-4. **Accessibility**: Responsive design, semantic HTML
-5. **Maintainability**: Clear documentation, modular code
+2. **Academic Presentation**: Clean, LIGO-inspired design focused on content
+3. **Community-Driven**: Easy contribution workflow via GitHub
+4. **Data Quality**: Automated validation prevents errors
+5. **Accessibility**: Responsive design, semantic HTML
+6. **Maintainability**: Clear documentation, modular code
 
 ---
 
@@ -198,12 +199,19 @@ keywords: ["keyword1", "keyword2"]
 
 ### Styling
 
-**Color Scheme (Taiji/ICTP-AP):**
-- Primary: #8c0000 (dark red)
+**Color Scheme (LIGO-inspired Academic Style):**
 - Background: #ffffff (white)
-- Text: #333333 (dark grey)
-- Accent: #f5f5f5 (light grey)
-- Hover: #a00000 (lighter red)
+- Text: #000000 (black)
+- Links: #000080 (navy blue)
+- Table Headers: LightSteelBlue
+- Table Alternating Rows: Lavender
+- Borders: #000080 (navy, 2px solid)
+- Hover: #f0f0f0 (light grey)
+
+**Typography:**
+- Font: Arial, Helvetica, sans-serif
+- Base Size: 10pt
+- Line Height: 1.4
 
 **Responsive Breakpoints:**
 - Mobile: < 768px
@@ -227,6 +235,16 @@ keywords: ["keyword1", "keyword2"]
 ---
 
 ## Common Tasks
+
+### View the Site Locally
+
+```bash
+# Start development server
+hugo server -D
+
+# Visit http://localhost:1313
+# Press Ctrl+C to stop
+```
 
 ### Add a New Publication
 
@@ -281,14 +299,87 @@ python scripts/validate-talk.py
 # Hugo will automatically recompile on save
 
 # Main stylesheet: assets/css/main.scss
-# Variables: assets/css/_variables.scss
+# Variables (LIGO colors): assets/css/_variables.scss
 ```
+
+---
+
+## LIGO-Style Design Reference
+
+The site now follows the LIGO Papers page design philosophy:
+
+**Visual Characteristics:**
+- White background throughout
+- Navy blue (#000080) for links and borders
+- Light steel blue table headers
+- Lavender alternating table rows
+- 10pt Arial/Helvetica font
+- 2px solid navy borders on tables
+- No gradients, shadows, or decorative elements
+- Minimal spacing and padding
+
+**Functional Features:**
+- Sortable table columns (click headers)
+- DOI toggle button (show/hide DOI links)
+- Year and type filtering
+- Search functionality
+- Simple, clean presentation
+
+**Comparison with Original Design:**
+- Removed: Red color scheme (#8c0000), gradient hero section, card layouts, styled buttons
+- Added: DOI toggle, LIGO color palette, minimal academic styling
+- Changed: Card-based talks to simple list, styled navigation to plain links
+
+---
+
+## Update Styling
 
 ---
 
 ## Modification History
 
-### 2025-04-09: Initial Implementation
+### 2025-04-09: LIGO-Style Redesign (v2.0.0)
+
+**Major Design Overhaul:**
+- Completely redesigned to match LIGO Papers page aesthetic
+- Removed all red color branding (#8c0000)
+- Implemented minimal, academic presentation style
+
+**CSS Changes:**
+- `assets/css/_variables.scss`: Replaced color scheme with LIGO-inspired palette
+  - Navy blue links (#000080)
+  - Light steel blue table headers
+  - Lavender alternating rows
+  - White background throughout
+  - 10pt Arial font
+- `assets/css/main.scss`: Complete rewrite
+  - Removed all gradients, shadows, transitions, border-radius
+  - Removed hero section styling
+  - Removed card layouts and styled buttons
+  - Implemented simple table styling with 2px navy borders
+  - Minimal header and footer styling
+
+**Template Simplification:**
+- `layouts/index.html`: Removed hero section and feature cards, replaced with simple intro text and plain links
+- `layouts/partials/header.html`: Removed red background and styled navigation, simple white header with plain text links
+- `layouts/partials/footer.html`: Simplified to minimal centered footer with pipe-separated links
+- `layouts/publications/list.html`: Added DOI toggle button, DOI links hidden by default
+- `layouts/talks/list.html`: Converted from card-based grid to simple list format
+
+**JavaScript Enhancements:**
+- `assets/js/table-filter.js`: Added DOI show/hide toggle functionality
+  - Toggle button switches between "Show DOI" and "Hide DOI"
+  - DOI links hidden by default (LIGO-style)
+  - Maintained all existing sorting and filtering features
+
+**Design Principles:**
+- Minimal is better: removed all decorative elements
+- Content first: focus on publication table and data
+- Academic style: clean, professional, no fancy design
+- LIGO reference: matched look and feel of LIGO Papers page
+- Functional: kept sorting, filtering, but simplified UI
+
+### 2025-04-09: Initial Implementation (v1.0.0)
 
 **Created:**
 - Hugo site structure with custom theme
@@ -304,11 +395,12 @@ python scripts/validate-talk.py
 
 **Key Files:**
 - `hugo.toml`: Site configuration
-- `layouts/index.html`: Homepage
-- `layouts/publications/list.html`: Publications table
-- `layouts/talks/list.html`: Talks grouped view
-- `assets/css/main.scss`: Main stylesheet
-- `assets/js/table-filter.js`: Filtering logic
+- `layouts/index.html`: Simple homepage with intro text
+- `layouts/publications/list.html`: Publications table with DOI toggle
+- `layouts/talks/list.html`: Talks simple list view
+- `assets/css/main.scss`: LIGO-style minimal stylesheet
+- `assets/css/_variables.scss`: LIGO color palette
+- `assets/js/table-filter.js`: Filtering logic with DOI toggle
 - `.github/workflows/hugo-build.yml`: Deployment workflow
 - `scripts/validate-publication.py`: Publication validator
 - `scripts/validate-talk.py`: Talk validator
@@ -317,7 +409,10 @@ python scripts/validate-talk.py
 - Used Hugo's native taxonomies for keywords and talk types
 - Implemented client-side filtering for better UX
 - Chose YAML frontmatter for human-readable data format
-- Adopted LIGO-style publication table design
+- Adopted LIGO-style minimal academic design (v2.0.0)
+- Implemented DOI toggle functionality (hidden by default)
+- Converted from card-based to list-based talk presentation
+- Removed all decorative styling in favor of content focus
 - Implemented mobile-first responsive design
 
 ---
@@ -516,5 +611,5 @@ This portal was developed for the Taiji Collaboration and is hosted by ICTP-AP (
 ---
 
 **Last Updated**: 2025-04-09
-**Version**: 1.0.0
-**Status**: Production Ready
+**Version**: 2.0.0
+**Status**: Production Ready (LIGO-style redesign)

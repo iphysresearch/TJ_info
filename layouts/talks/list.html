@@ -19,11 +19,24 @@
     {{ range $talksByType }}
     <section class="talks-section">
         <h2 class="talk-type-heading">{{ .Key | humanize }}</h2>
-        <div class="talks-grid">
+        <ul class="talks-list">
             {{ range .Pages.ByDate.Reverse }}
-            {{ partial "talk-card.html" . }}
+            <li class="talk-item" data-year="{{ .Date.Format "2006" }}" data-keywords="{{ delimit .Params.keywords "," }}">
+                <div class="talk-title">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </div>
+                <div class="talk-meta">
+                    {{ .Params.speaker.name }}{{ with .Params.speaker.affiliation }}, {{ . }}{{ end }} |
+                    {{ .Params.event }}{{ with .Params.location }}, {{ . }}{{ end }} |
+                    {{ .Date.Format "2006-01-02" }}
+                </div>
+                <div class="talk-links">
+                    {{ with .Params.slides_url }}<a href="{{ . }}" target="_blank" rel="noopener">Slides</a>{{ end }}
+                    {{ with .Params.video_url }}<a href="{{ . }}" target="_blank" rel="noopener">Video</a>{{ end }}
+                </div>
+            </li>
             {{ end }}
-        </div>
+        </ul>
     </section>
     {{ end }}
 </div>

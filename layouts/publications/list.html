@@ -23,7 +23,10 @@
             <input type="text" id="search-input" placeholder="Search publications...">
         </div>
         <div class="filter-group">
-            <button id="export-bibtex" class="btn btn-secondary">Export BibTeX</button>
+            <button id="toggle-doi" class="doi-toggle">Show DOI</button>
+        </div>
+        <div class="filter-group">
+            <button id="export-bibtex">Export BibTeX</button>
         </div>
     </div>
 
@@ -46,8 +49,8 @@
                     <td>{{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }}</td>
                     <td>{{ with .Params.journal }}{{ . }}{{ if $.Params.volume }} {{ $.Params.volume }}{{ end }}{{ end }}</td>
                     <td class="links-cell">
-                        {{ with .Params.arxiv }}<a href="https://arxiv.org/abs/{{ . }}" target="_blank" rel="noopener" class="link-badge">arXiv</a>{{ end }}
-                        {{ with .Params.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener" class="link-badge">DOI</a>{{ end }}
+                        {{ with .Params.arxiv }}<a href="https://arxiv.org/abs/{{ . }}" target="_blank" rel="noopener">arXiv</a>{{ end }}
+                        {{ with .Params.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener" class="doi-link" style="display:none;">DOI</a>{{ end }}
                     </td>
                 </tr>
                 {{ end }}

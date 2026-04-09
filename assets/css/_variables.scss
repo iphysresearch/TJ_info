@@ -1,27 +1,25 @@
-// Variables
-$primary-color: #8c0000;
-$background-color: #ffffff;
-$text-color: #333333;
-$accent-color: #f5f5f5;
-$border-color: #dddddd;
-$hover-color: #a00000;
+// LIGO-style colors
+$background: #FFFFFF;
+$text: #000000;
+$link: #000080;  // Navy
+$table-header: LightSteelBlue;
+$table-alt-row: Lavender;
+$border: #000080;  // Navy
+$hover: #F0F0F0;
 
 // Typography
-$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-$font-size-base: 16px;
-$line-height-base: 1.6;
+$font-family: Arial, Helvetica, sans-serif;
+$font-size: 10pt;
+$line-height: 1.4;
 
-// Spacing
-$spacing-xs: 0.5rem;
-$spacing-sm: 1rem;
-$spacing-md: 1.5rem;
-$spacing-lg: 2rem;
-$spacing-xl: 3rem;
+// Minimal spacing
+$spacing-xs: 2px;
+$spacing-sm: 0.5em;
+$spacing-md: 1em;
+$spacing-lg: 2em;
 
 // Breakpoints
 $breakpoint-mobile: 768px;
-$breakpoint-tablet: 1024px;
-$breakpoint-desktop: 1280px;
 
 // Container
 $container-max-width: 1200px;
