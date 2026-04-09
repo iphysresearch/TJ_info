@@ -1,0 +1,52 @@
+{{ define "main" }}
+<div class="container">
+    <article class="publication-detail">
+        <h1>{{ .Title }}</h1>
+
+        <div class="publication-meta">
+            <div class="meta-item">
+                <strong>Date:</strong> {{ .Date.Format "January 2, 2006" }}
+            </div>
+            <div class="meta-item">
+                <strong>Authors:</strong>
+                <ul class="authors-list">
+                    {{ range .Params.authors }}
+                    <li>{{ .name }}{{ with .affiliation }} ({{ . }}){{ end }}</li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ with .Params.journal }}
+            <div class="meta-item">
+                <strong>Journal:</strong> {{ . }}{{ with $.Params.volume }} {{ . }}{{ end }}{{ with $.Params.pages }}, {{ . }}{{ end }}
+            </div>
+            {{ end }}
+            <div class="meta-item">
+                <strong>Type:</strong> {{ .Params.publication_type }}
+            </div>
+            {{ with .Params.keywords }}
+            <div class="meta-item">
+                <strong>Keywords:</strong> {{ delimit . ", " }}
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="publication-links">
+            {{ with .Params.arxiv }}
+            <a href="https://arxiv.org/abs/{{ . }}" target="_blank" rel="noopener" class="btn btn-primary">arXiv: {{ . }}</a>
+            {{ end }}
+            {{ with .Params.doi }}
+            <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener" class="btn btn-primary">DOI: {{ . }}</a>
+            {{ end }}
+        </div>
+
+        {{ with .Params.abstract }}
+        <div class="abstract">
+            <h2>Abstract</h2>
+            <p>{{ . }}</p>
+        </div>
+        {{ end }}
+
+        {{ .Content }}
+    </article>
+</div>
+{{ end }}

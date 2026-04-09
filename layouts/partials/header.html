@@ -1,0 +1,19 @@
+<header class="site-header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/taiji-logo.svg" alt="Taiji Logo" class="logo-image">
+                    <span class="logo-text">{{ .Site.Params.logo.text }}</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    {{ range .Site.Menus.main }}
+                    <li><a href="{{ .URL }}" {{ if $.IsMenuCurrent "main" . }}class="active"{{ end }}>{{ .Name }}</a></li>
+                    {{ end }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,43 @@
+baseURL = 'https://taiji-publications.github.io/'
+languageCode = 'en-us'
+title = 'Taiji Publications & Talks'
+theme = ''
+
+[params]
+  description = 'Publications and talks related to the Taiji space gravitational wave detection project'
+  author = 'Taiji Collaboration'
+  primaryColor = '#8c0000'
+
+[params.logo]
+  text = 'Taiji Publications'
+
+[menu]
+  [[menu.main]]
+    name = 'Home'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    name = 'Publications'
+    url = '/publications/'
+    weight = 2
+  [[menu.main]]
+    name = 'Talks'
+    url = '/talks/'
+    weight = 3
+  [[menu.main]]
+    name = 'Contribute'
+    url = '/contribute/'
+    weight = 4
+
+[taxonomies]
+  keyword = 'keywords'
+  talk_type = 'talk_types'
+
+[outputs]
+  home = ['HTML', 'RSS']
+  section = ['HTML', 'RSS']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

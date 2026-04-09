@@ -1,0 +1,26 @@
+<div class="talk-card" data-year="{{ .Date.Format "2006" }}" data-keywords="{{ delimit .Params.keywords "," }}">
+    <div class="talk-card-header">
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        <div class="talk-date">{{ .Date.Format "January 2, 2006" }}</div>
+    </div>
+    <div class="talk-card-body">
+        <div class="talk-speaker">
+            <strong>{{ .Params.speaker.name }}</strong>
+            {{ with .Params.speaker.affiliation }}<span class="affiliation">{{ . }}</span>{{ end }}
+        </div>
+        <div class="talk-event">
+            {{ .Params.event }}{{ with .Params.location }} - {{ . }}{{ end }}
+        </div>
+        {{ with .Params.abstract }}
+        <p class="talk-abstract">{{ . | truncate 150 }}</p>
+        {{ end }}
+    </div>
+    <div class="talk-card-footer">
+        {{ with .Params.slides_url }}
+        <a href="{{ . }}" target="_blank" rel="noopener" class="link-badge">Slides</a>
+        {{ end }}
+        {{ with .Params.video_url }}
+        <a href="{{ . }}" target="_blank" rel="noopener" class="link-badge">Video</a>
+        {{ end }}
+    </div>
+</div>

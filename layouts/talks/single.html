@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div class="container">
+    <article class="talk-detail">
+        <h1>{{ .Title }}</h1>
+
+        <div class="talk-meta">
+            <div class="meta-item">
+                <strong>Date:</strong> {{ .Date.Format "January 2, 2006" }}
+            </div>
+            <div class="meta-item">
+                <strong>Speaker:</strong> {{ .Params.speaker.name }}
+                {{ with .Params.speaker.affiliation }}<span class="affiliation">({{ . }})</span>{{ end }}
+            </div>
+            <div class="meta-item">
+                <strong>Event:</strong> {{ .Params.event }}
+            </div>
+            {{ with .Params.location }}
+            <div class="meta-item">
+                <strong>Location:</strong> {{ . }}
+            </div>
+            {{ end }}
+            <div class="meta-item">
+                <strong>Type:</strong> {{ .Params.talk_type | humanize }}
+            </div>
+            {{ with .Params.keywords }}
+            <div class="meta-item">
+                <strong>Keywords:</strong> {{ delimit . ", " }}
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="talk-links">
+            {{ with .Params.slides_url }}
+            <a href="{{ . }}" target="_blank" rel="noopener" class="btn btn-primary">View Slides</a>
+            {{ end }}
+            {{ with .Params.video_url }}
+            <a href="{{ . }}" target="_blank" rel="noopener" class="btn btn-primary">Watch Video</a>
+            {{ end }}
+        </div>
+
+        {{ with .Params.abstract }}
+        <div class="abstract">
+            <h2>Abstract</h2>
+            <p>{{ . }}</p>
+        </div>
+        {{ end }}
+
+        {{ .Content }}
+    </article>
+</div>
+{{ end }}

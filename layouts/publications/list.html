@@ -1,0 +1,63 @@
+{{ define "main" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <div class="publications-controls">
+        <div class="filter-group">
+            <label for="year-filter">Year:</label>
+            <select id="year-filter">
+                <option value="">All Years</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="type-filter">Type:</label>
+            <select id="type-filter">
+                <option value="">All Types</option>
+                <option value="journal">Journal</option>
+                <option value="conference">Conference</option>
+                <option value="preprint">Preprint</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <input type="text" id="search-input" placeholder="Search publications...">
+        </div>
+        <div class="filter-group">
+            <button id="export-bibtex" class="btn btn-secondary">Export BibTeX</button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="publications-table" id="publications-table">
+            <thead>
+                <tr>
+                    <th data-sort="date">Date</th>
+                    <th data-sort="title">Title</th>
+                    <th data-sort="authors">Authors</th>
+                    <th>Journal</th>
+                    <th>Links</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range .Pages.ByDate.Reverse }}
+                <tr data-year="{{ .Date.Format "2006" }}" data-type="{{ .Params.publication_type }}" data-keywords="{{ delimit .Params.keywords "," }}">
+                    <td data-sort-value="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</td>
+                    <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
+                    <td>{{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }}</td>
+                    <td>{{ with .Params.journal }}{{ . }}{{ if $.Params.volume }} {{ $.Params.volume }}{{ end }}{{ end }}</td>
+                    <td class="links-cell">
+                        {{ with .Params.arxiv }}<a href="https://arxiv.org/abs/{{ . }}" target="_blank" rel="noopener" class="link-badge">arXiv</a>{{ end }}
+                        {{ with .Params.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener" class="link-badge">DOI</a>{{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+{{ $script := resources.Get "js/table-filter.js" }}
+<script src="{{ $script.Permalink }}"></script>
+{{ end }}

@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <div class="talks-controls">
+        <div class="filter-group">
+            <label for="year-filter">Year:</label>
+            <select id="year-filter">
+                <option value="">All Years</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <input type="text" id="search-input" placeholder="Search talks...">
+        </div>
+    </div>
+
+    {{ $talksByType := .RegularPages.GroupByParam "talk_type" }}
+    {{ range $talksByType }}
+    <section class="talks-section">
+        <h2 class="talk-type-heading">{{ .Key | humanize }}</h2>
+        <div class="talks-grid">
+            {{ range .Pages.ByDate.Reverse }}
+            {{ partial "talk-card.html" . }}
+            {{ end }}
+        </div>
+    </section>
+    {{ end }}
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+{{ $script := resources.Get "js/table-filter.js" }}
+<script src="{{ $script.Permalink }}"></script>
+{{ end }}
