@@ -2,8 +2,8 @@
 
 **Project**: Taiji Publications & Talks Portal
 **Created**: 2025-04-09
-**Last Updated**: 2025-04-09
-**Status**: Initial Implementation Complete
+**Last Updated**: 2025-04-14
+**Status**: Citation Tracking System Implemented (v3.0.0)
 
 ---
 
@@ -19,13 +19,16 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 - Enable easy community contributions through GitHub workflow
 - Maintain high data quality through automated validation
 - Present content in an accessible, responsive design
+- **Track citations and discover related papers automatically**
 
 **Technology Stack:**
 - **Static Site Generator**: Hugo (extended version)
 - **Styling**: Custom SCSS with LIGO-inspired minimal academic design
 - **Deployment**: GitHub Pages via GitHub Actions
-- **Validation**: Python scripts for YAML schema checking
-- **Data Format**: YAML frontmatter in Markdown files
+- **Validation**: Python scripts for JSON/YAML schema checking
+- **Data Format**: JSON database with Hugo content sync
+- **Citation Tracking**: Semantic Scholar, Crossref, arXiv, INSPIRE-HEP APIs
+- **Build System**: Makefile-driven development workflow
 
 ### 中文版本
 
@@ -37,13 +40,16 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 - 通过GitHub工作流程实现简便的社区贡献
 - 通过自动验证保持高数据质量
 - 以可访问、响应式的设计呈现内容
+- **自动追踪引用并发现相关论文**
 
 **技术栈：**
 - **静态站点生成器**：Hugo（扩展版本）
 - **样式**：自定义SCSS，采用LIGO风格的简约学术设计
 - **部署**：通过GitHub Actions部署到GitHub Pages
-- **验证**：用于YAML模式检查的Python脚本
-- **数据格式**：Markdown文件中的YAML前置元数据
+- **验证**：用于JSON/YAML模式检查的Python脚本
+- **数据格式**：JSON数据库与Hugo内容同步
+- **引用追踪**：Semantic Scholar、Crossref、arXiv、INSPIRE-HEP API
+- **构建系统**：Makefile驱动的开发工作流
 
 ---
 
@@ -57,13 +63,21 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 4. **GitHub Pages**: Seamless deployment via GitHub Actions
 5. **Community**: Large ecosystem and excellent documentation
 
-### Why YAML Frontmatter?
+### Why JSON Database?
 
-1. **Human-Readable**: Easy for non-technical contributors to edit
-2. **Git-Friendly**: Clear diffs for PR reviews
-3. **Structured**: Enforces consistent data schema
-4. **Hugo Native**: Direct support without additional processing
-5. **Validation**: Easy to validate with Python scripts
+1. **Structured Data**: Enforces consistent schema across entries
+2. **API Integration**: Easy to populate from external APIs (arXiv, Crossref, etc.)
+3. **Citation Tracking**: Supports complex relationships and metadata
+4. **Dual Sync**: Database syncs to both Hugo content and data files
+5. **Validation**: JSON Schema validation for data quality
+
+### Why Makefile?
+
+1. **Single Entry Point**: All commands through `make`
+2. **Dependency Management**: Automatic ordering of tasks
+3. **Documentation**: Self-documenting with `make help`
+4. **CI/CD Ready**: Easy integration with GitHub Actions
+5. **Cross-Platform**: Works on Linux, macOS, and WSL
 
 ### Design Philosophy
 
@@ -100,6 +114,11 @@ TJ_info/
 │   └── js/
 │       └── table-filter.js         # Filtering/sorting logic
 │
+├── config/                         # [NEW] Configuration files
+│   ├── taxonomy.yaml               # Taiji classification system
+│   ├── schema.json                 # JSON Schema for validation
+│   └── api_keys.yaml.example       # API keys template
+│
 ├── content/
 │   ├── publications/
 │   │   ├── _index.md               # Publications landing page
@@ -111,7 +130,18 @@ TJ_info/
 │       └── _index.md               # Contribution guidelines
 │
 ├── data/
-│   └── config/                     # Configuration data files
+│   ├── papers.json                 # [NEW] Main publications database
+│   ├── citations_cache.json        # [NEW] Citation relationships
+│   └── api_cache/                  # [NEW] API response cache
+│       ├── arxiv/
+│       ├── crossref/
+│       └── semantic_scholar/
+│
+├── database/                       # [NEW] Export formats
+│   ├── papers.bib                  # BibTeX export
+│   ├── papers.csv                  # CSV export
+│   ├── papers.md                   # Markdown export
+│   └── papers.json                 # JSON export
 │
 ├── layouts/
 │   ├── _default/
@@ -130,18 +160,214 @@ TJ_info/
 │   │   └── talk-card.html          # Talk card component
 │   └── index.html                  # Homepage
 │
+├── reports/                        # [NEW] Generated reports
+│   └── quality_report.json
+│
 ├── scripts/
-│   ├── validate-publication.py     # Publication validator
-│   └── validate-talk.py            # Talk validator
+│   ├── lib/                        # [NEW] Shared Python libraries
+│   │   ├── __init__.py
+│   │   ├── api_client.py           # API clients (arXiv, Crossref, S2, INSPIRE)
+│   │   ├── db_manager.py           # Database operations
+│   │   ├── classifier.py           # Taiji relevance scoring
+│   │   └── validator.py            # Data validation
+│   │
+│   ├── add_paper.py                # [NEW] Add papers by DOI/arXiv
+│   ├── find_citations.py           # [NEW] Citation tracking
+│   ├── sync_database.py            # [NEW] Sync DB to Hugo
+│   ├── export_data.py              # [NEW] Multi-format export
+│   ├── validate_data.py            # [NEW] Database validation
+│   ├── update_citations.py         # [NEW] Update citation counts
+│   ├── generate_report.py          # [NEW] Quality reports
+│   ├── validate-publication.py     # Legacy publication validator
+│   └── validate-talk.py            # Legacy talk validator
 │
 ├── static/
 │   ├── images/                     # Logo, favicon, etc.
 │   └── downloads/                  # Static files
 │
+├── Makefile                        # [NEW] Development commands
+├── requirements.txt                # [NEW] Python dependencies
 ├── hugo.toml                       # Hugo configuration
 ├── README.md                       # Project documentation
 ├── CONTRIBUTING.md                 # Contribution guide
 └── CLAUDE.md                       # This file
+```
+
+---
+
+## Citation Tracking System
+
+### Overview
+
+The citation tracking system allows automatic discovery of papers citing Taiji publications and evaluates their relevance to the project.
+
+### Data Flow
+
+```
+External APIs                     Python Scripts                    Output
+─────────────                     ──────────────                    ──────
+arXiv API ────────┐
+                  │
+Crossref API ─────┼──→ scripts/lib/api_client.py ──→ data/papers.json
+                  │              │
+Semantic Scholar ─┤              ├──→ data/citations_cache.json
+                  │              │
+INSPIRE-HEP ──────┘              └──→ content/publications/*.md
+                                              │
+                                              ↓
+                                     Hugo Static Site
+```
+
+### Database Structure (`data/papers.json`)
+
+```json
+{
+  "metadata": {
+    "version": "1.0",
+    "project": "Taiji Publications",
+    "last_updated": "2025-04-14",
+    "total_entries": 5
+  },
+  "entries": [
+    {
+      "entry_id": "10.1103/PhysRevD.111.084023",
+      "title": "Paper Title",
+      "authors": [{"name": "Author", "affiliation": "Institution"}],
+      "year": 2025,
+      "journal": "Physical Review D",
+      "doi": "10.1103/PhysRevD.111.084023",
+      "arxiv_id": "2603.25327",
+      "keywords": ["keyword1", "keyword2"],
+      "publication_type": "journal",
+      "featured": true,
+      "citation_count": 0,
+      "classification": {
+        "research_area": "pathfinder",
+        "source_types": ["mbhb"],
+        "methods": ["simulation"],
+        "relevance_score": 1.0
+      }
+    }
+  ]
+}
+```
+
+### Classification Taxonomy
+
+**Research Areas:**
+- `mission_design` - Orbital mechanics, constellation design
+- `instrument` - Laser systems, interferometry, drag-free control
+- `data_analysis` - Signal processing, parameter estimation
+- `source_modeling` - Waveform modeling, source populations
+- `science_case` - Astrophysics, cosmology, fundamental physics
+- `pathfinder` - Taiji-1, Taiji-2, technology demonstrations
+
+**Source Types:**
+- `mbhb` - Massive Black Hole Binaries
+- `emri` - Extreme Mass Ratio Inspirals
+- `galactic_binary` - Galactic compact binaries
+- `sgwb` - Stochastic Gravitational Wave Background
+- `verification_binary` - Known calibration sources
+- `cosmological` - Standard/dark sirens
+
+**Methods:**
+- `data_analysis`, `waveform_modeling`, `parameter_estimation`
+- `noise_modeling`, `tdi`, `simulation`
+
+---
+
+## Common Tasks
+
+### Using Makefile Commands
+
+```bash
+# Show all available commands
+make help
+
+# Install Python dependencies
+make install
+
+# Check dependencies
+make check-deps
+```
+
+### Database Operations
+
+```bash
+# Validate database
+make validate
+
+# Show statistics
+make stats
+
+# Generate quality report
+make report
+```
+
+### Adding Papers
+
+```bash
+# Add by DOI
+make add-doi DOI=10.1103/PhysRevD.100.022003
+
+# Add by arXiv ID
+make add-arxiv ID=2401.12345
+
+# Interactive mode
+make add-interactive
+```
+
+### Citation Tracking
+
+```bash
+# Find citations for a paper
+make find-citations ARXIV=2401.12345
+
+# Auto-add relevant citations
+make find-citations-auto ARXIV=2401.12345 LIMIT=10 MIN_REL=0.5
+
+# Dry run (no changes)
+make find-citations-dry ARXIV=2401.12345
+
+# Update all citation counts
+make update-citations
+```
+
+### Export and Sync
+
+```bash
+# Export to all formats (BibTeX, CSV, Markdown, JSON)
+make export
+
+# Export specific format
+make export-bibtex
+make export-csv
+
+# Sync database to Hugo content
+make sync
+```
+
+### Hugo Site
+
+```bash
+# Start development server
+make serve
+
+# Build for production
+make build
+
+# Full deployment workflow
+make deploy
+```
+
+### View the Site Locally
+
+```bash
+# Start development server
+hugo server -D
+
+# Visit http://localhost:1313
+# Press Ctrl+C to stop
 ```
 
 ---
@@ -155,6 +381,8 @@ TJ_info/
 - Client-side filtering by year, type, and search term
 - arXiv and DOI badges with direct links
 - Responsive table design (horizontal scroll on mobile)
+- **Citation count display**
+- **Taiji relevance scoring**
 
 **Data Structure:**
 ```yaml
@@ -172,6 +400,7 @@ doi: "10.1103/PhysRevD.123.456789"
 keywords: ["keyword1", "keyword2"]
 publication_type: "journal"  # journal, conference, preprint
 featured: false
+citation_count: 42
 ```
 
 ### Talks Page
@@ -220,97 +449,26 @@ keywords: ["keyword1", "keyword2"]
 
 ### Validation
 
-**Publication Validation:**
-- Required fields: title, date, authors, year, keywords, publication_type
-- Valid types: journal, conference, preprint
-- Authors must be list of dicts with 'name' field
-- Keywords must be list
+**Database Validation (via `make validate`):**
+- Required fields: entry_id, title, authors, year
+- Valid publication types: journal, conference, preprint, thesis, report
+- DOI format validation (10.xxxx/...)
+- arXiv ID format validation (YYMM.NNNNN)
+- Duplicate detection (DOI, arXiv, title similarity)
+- Classification validity
 
-**Talk Validation:**
-- Required fields: title, date, speaker, event, talk_type, keywords
-- Valid types: conference, seminar, workshop, colloquium, public
-- Speaker must be dict with 'name' field
-- Keywords must be list
-
----
-
-## Common Tasks
-
-### View the Site Locally
-
-```bash
-# Start development server
-hugo server -D
-
-# Visit http://localhost:1313
-# Press Ctrl+C to stop
-```
-
-### Add a New Publication
-
-```bash
-# Create new file
-hugo new content/publications/YYYY-MM-DD-short-title.md
-
-# Edit the file with publication details
-# Validate
-python scripts/validate-publication.py
-
-# Commit and push
-git add content/publications/YYYY-MM-DD-short-title.md
-git commit -m "Add publication: Title"
-git push
-```
-
-### Add a New Talk
-
-```bash
-# Create new file
-hugo new content/talks/YYYY-MM-DD-event-name.md
-
-# Edit the file with talk details
-# Validate
-python scripts/validate-talk.py
-
-# Commit and push
-git add content/talks/YYYY-MM-DD-event-name.md
-git commit -m "Add talk: Event Name"
-git push
-```
-
-### Local Development
-
-```bash
-# Start development server
-hugo server -D
-
-# Build for production
-hugo --gc --minify
-
-# Run validation
-python scripts/validate-publication.py
-python scripts/validate-talk.py
-```
-
-### Update Styling
-
-```bash
-# Edit SCSS files in assets/css/
-# Hugo will automatically recompile on save
-
-# Main stylesheet: assets/css/main.scss
-# Variables (LIGO colors): assets/css/_variables.scss
-```
+**Legacy Validation:**
+- `scripts/validate-publication.py` - Hugo frontmatter validation
+- `scripts/validate-talk.py` - Talk frontmatter validation
 
 ---
 
 ## LIGO-Style Design Reference
 
-The site now follows the LIGO Papers page design philosophy:
+The site follows the LIGO Papers page design philosophy:
 
 **Style Reference Link:**
 - LIGO Papers page: [https://pnp.ligo.org/ppcomm/Papers.html](https://pnp.ligo.org/ppcomm/Papers.html)
-- LIGO Papers 页面（样式参考链接）：[https://pnp.ligo.org/ppcomm/Papers.html](https://pnp.ligo.org/ppcomm/Papers.html)
 
 **Visual Characteristics:**
 - White background throughout
@@ -329,18 +487,49 @@ The site now follows the LIGO Papers page design philosophy:
 - Search functionality
 - Simple, clean presentation
 
-**Comparison with Original Design:**
-- Removed: Red color scheme (#8c0000), gradient hero section, card layouts, styled buttons
-- Added: DOI toggle, LIGO color palette, minimal academic styling
-- Changed: Card-based talks to simple list, styled navigation to plain links
-
----
-
-## Update Styling
-
 ---
 
 ## Modification History
+
+### 2025-04-14: Citation Tracking System (v3.0.0)
+
+**Major Feature Addition:**
+- Complete citation tracking system inspired by Survey4GWML
+- External API integration (arXiv, Crossref, Semantic Scholar, INSPIRE-HEP)
+- JSON database system with Hugo content sync
+- Makefile-driven development workflow
+
+**New Files Created:**
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `Makefile` | ~180 | Development command center |
+| `requirements.txt` | ~12 | Python dependencies |
+| `config/taxonomy.yaml` | ~150 | Taiji classification system |
+| `config/schema.json` | ~200 | JSON Schema validation |
+| `config/api_keys.yaml.example` | ~25 | API keys template |
+| `data/papers.json` | dynamic | Main publications database |
+| `data/citations_cache.json` | dynamic | Citation relationships |
+| `scripts/lib/__init__.py` | ~50 | Package exports |
+| `scripts/lib/api_client.py` | ~650 | API clients |
+| `scripts/lib/db_manager.py` | ~350 | Database operations |
+| `scripts/lib/classifier.py` | ~280 | Relevance scoring |
+| `scripts/lib/validator.py` | ~550 | Data validation |
+| `scripts/add_paper.py` | ~300 | Add papers CLI |
+| `scripts/find_citations.py` | ~400 | Citation tracking |
+| `scripts/sync_database.py` | ~200 | Hugo sync |
+| `scripts/export_data.py` | ~250 | Multi-format export |
+| `scripts/validate_data.py` | ~200 | Validation CLI |
+| `scripts/update_citations.py` | ~150 | Citation updates |
+| `scripts/generate_report.py` | ~250 | Report generation |
+
+**Key Features:**
+- Add papers via DOI or arXiv ID with automatic metadata fetch
+- Track citations using Semantic Scholar API
+- Score papers for Taiji relevance automatically
+- Export to BibTeX, CSV, Markdown, JSON
+- Sync database to Hugo content
+- Quality reports and statistics
 
 ### 2025-04-09: LIGO-Style Redesign (v2.0.0)
 
@@ -349,40 +538,6 @@ The site now follows the LIGO Papers page design philosophy:
 - Removed all red color branding (#8c0000)
 - Implemented minimal, academic presentation style
 
-**CSS Changes:**
-- `assets/css/_variables.scss`: Replaced color scheme with LIGO-inspired palette
-  - Navy blue links (#000080)
-  - Light steel blue table headers
-  - Lavender alternating rows
-  - White background throughout
-  - 10pt Arial font
-- `assets/css/main.scss`: Complete rewrite
-  - Removed all gradients, shadows, transitions, border-radius
-  - Removed hero section styling
-  - Removed card layouts and styled buttons
-  - Implemented simple table styling with 2px navy borders
-  - Minimal header and footer styling
-
-**Template Simplification:**
-- `layouts/index.html`: Removed hero section and feature cards, replaced with simple intro text and plain links
-- `layouts/partials/header.html`: Removed red background and styled navigation, simple white header with plain text links
-- `layouts/partials/footer.html`: Simplified to minimal centered footer with pipe-separated links
-- `layouts/publications/list.html`: Added DOI toggle button, DOI links hidden by default
-- `layouts/talks/list.html`: Converted from card-based grid to simple list format
-
-**JavaScript Enhancements:**
-- `assets/js/table-filter.js`: Added DOI show/hide toggle functionality
-  - Toggle button switches between "Show DOI" and "Hide DOI"
-  - DOI links hidden by default (LIGO-style)
-  - Maintained all existing sorting and filtering features
-
-**Design Principles:**
-- Minimal is better: removed all decorative elements
-- Content first: focus on publication table and data
-- Academic style: clean, professional, no fancy design
-- LIGO reference: matched look and feel of LIGO Papers page
-- Functional: kept sorting, filtering, but simplified UI
-
 ### 2025-04-09: Initial Implementation (v1.0.0)
 
 **Created:**
@@ -390,106 +545,61 @@ The site now follows the LIGO Papers page design philosophy:
 - Publications and talks content types
 - Responsive layouts with Taiji branding
 - JavaScript filtering and sorting
-- GitHub Actions workflows for deployment and validation
+- GitHub Actions workflows
 - Python validation scripts
-- Comprehensive documentation (README, CONTRIBUTING, CLAUDE.md)
-- Example publications (5 entries)
-- Example talks (5 entries across all types)
-- Issue and PR templates
-
-**Key Files:**
-- `hugo.toml`: Site configuration
-- `layouts/index.html`: Simple homepage with intro text
-- `layouts/publications/list.html`: Publications table with DOI toggle
-- `layouts/talks/list.html`: Talks simple list view
-- `assets/css/main.scss`: LIGO-style minimal stylesheet
-- `assets/css/_variables.scss`: LIGO color palette
-- `assets/js/table-filter.js`: Filtering logic with DOI toggle
-- `.github/workflows/hugo-build.yml`: Deployment workflow
-- `scripts/validate-publication.py`: Publication validator
-- `scripts/validate-talk.py`: Talk validator
-
-**Design Decisions:**
-- Used Hugo's native taxonomies for keywords and talk types
-- Implemented client-side filtering for better UX
-- Chose YAML frontmatter for human-readable data format
-- Adopted LIGO-style minimal academic design (v2.0.0)
-- Implemented DOI toggle functionality (hidden by default)
-- Converted from card-based to list-based talk presentation
-- Removed all decorative styling in favor of content focus
-- Implemented mobile-first responsive design
+- Comprehensive documentation
 
 ---
 
 ## Future Enhancements
 
+### Completed (v3.0.0)
+
+- [x] BibTeX Export
+- [x] Citation tracking
+- [x] Statistics/Quality reports
+- [x] Multi-format export (CSV, JSON, Markdown)
+- [x] Integration with INSPIRE-HEP
+
 ### Short-term (Next 3 months)
 
 1. **Search Functionality**
    - Full-text search across publications and talks
-   - Search by author, keyword, or content
    - Implement with Lunr.js or similar
 
-2. **BibTeX Export**
-   - Generate BibTeX entries from publication data
-   - Bulk export functionality
-   - Individual publication BibTeX download
+2. **Automated arXiv Monitoring**
+   - Monitor arXiv for Taiji-related papers
+   - GitHub Action for automatic PR creation
 
-3. **Statistics Dashboard**
-   - Publications per year chart
-   - Talk distribution by type
-   - Keyword cloud visualization
-   - Author collaboration network
-
-4. **Enhanced Filtering**
+3. **Enhanced Filtering**
    - Multi-select keyword filtering
    - Author search and filtering
    - Date range selection
-   - Advanced query builder
 
 ### Medium-term (3-6 months)
 
 1. **RSS Feeds**
    - Per-category RSS feeds
    - New publications feed
-   - Upcoming talks feed
 
 2. **ORCID Integration**
    - Link authors to ORCID profiles
    - Import publication data from ORCID
-   - Author profile pages
 
-3. **Automated arXiv Scraping**
-   - Monitor arXiv for Taiji-related papers
-   - Automated PR creation for new papers
-   - Email notifications for maintainers
-
-4. **Multi-language Support**
+3. **Multi-language Support**
    - Chinese translation of interface
    - Bilingual content support
-   - Language switcher
 
 ### Long-term (6+ months)
 
 1. **API Endpoint**
    - JSON API for programmatic access
    - GraphQL interface
-   - Rate limiting and authentication
 
-2. **Advanced Analytics**
-   - Citation tracking
-   - Impact metrics
-   - Collaboration network analysis
-
-3. **Interactive Visualizations**
+2. **Interactive Visualizations**
    - Timeline of publications
-   - Geographic distribution of talks
    - Topic evolution over time
-
-4. **Integration with Other Databases**
-   - ADS (Astrophysics Data System)
-   - INSPIRE-HEP
-   - Google Scholar
+   - Citation network graph
 
 ---
 
@@ -497,40 +607,57 @@ The site now follows the LIGO Papers page design philosophy:
 
 ### Common Issues
 
+**Make command not found:**
+```bash
+# Install make (macOS)
+xcode-select --install
+
+# Install make (Ubuntu/Debian)
+sudo apt-get install build-essential
+```
+
+**Python dependencies missing:**
+```bash
+make install
+# or
+pip install -r requirements.txt
+```
+
+**API rate limiting:**
+- Use caching (data/api_cache/)
+- Add delay between requests
+- Get API key for Semantic Scholar
+
+**Database validation fails:**
+```bash
+make validate
+# Check specific issues
+python scripts/validate_data.py --check format
+python scripts/validate_data.py --check duplicates
+```
+
 **Hugo build fails:**
 - Check Hugo version (requires extended version)
 - Verify YAML frontmatter syntax
-- Ensure all required fields are present
-
-**Validation errors:**
-- Run validation scripts locally
-- Check field types (list vs string vs dict)
-- Verify publication_type and talk_type values
-
-**Styling not updating:**
-- Clear browser cache
-- Check SCSS syntax
-- Restart Hugo server
-
-**GitHub Actions failing:**
-- Check workflow logs
-- Verify Python dependencies
-- Ensure file paths are correct
+- Run `make sync` to regenerate content
 
 ### Debug Commands
 
 ```bash
+# Check dependencies
+make check-deps
+
 # Check Hugo version
 hugo version
 
-# Validate YAML syntax
-python -c "import yaml; yaml.safe_load(open('file.md').read().split('---')[1])"
+# Validate database with details
+python scripts/validate_data.py --json
 
-# Test build
-hugo --gc --minify --verbose
+# Test API clients
+python scripts/lib/api_client.py --arxiv 2401.12345
 
-# Check for broken links
-hugo --gc --minify && htmlproofer public/
+# Show database stats
+make stats
 ```
 
 ---
@@ -539,29 +666,21 @@ hugo --gc --minify && htmlproofer public/
 
 ### Code Style
 
+**Python:**
+- Follow PEP 8
+- Use type hints
+- Add docstrings to all functions
+- Handle API errors gracefully
+
 **SCSS:**
 - Use variables for colors and spacing
 - Follow BEM naming convention
 - Mobile-first media queries
-- Comment complex selectors
 
 **JavaScript:**
 - Use vanilla JS (no frameworks)
 - Add comments for complex logic
 - Handle edge cases gracefully
-- Test across browsers
-
-**HTML:**
-- Semantic HTML5 elements
-- Accessible markup (ARIA labels)
-- Proper heading hierarchy
-- Valid HTML
-
-**YAML:**
-- Consistent indentation (2 spaces)
-- Use quotes for strings with special characters
-- Pipe syntax for multi-line text
-- Alphabetical field order (optional)
 
 ### Git Workflow
 
@@ -576,24 +695,18 @@ hugo --gc --minify && htmlproofer public/
 - Clear, descriptive messages
 - Reference issues when applicable
 
-**Pull Requests:**
-- Fill out PR template completely
-- Ensure CI passes
-- Request review from maintainers
-- Respond to feedback promptly
-
 ---
 
 ## Contact & Support
 
 **Maintainers:**
 - GitHub: [@taiji-publications](https://github.com/taiji-publications)
-- Email: [To be added]
 
 **Resources:**
 - Hugo Documentation: https://gohugo.io/documentation/
 - GitHub Pages: https://pages.github.com/
 - Taiji Mission: https://ictp-ap.org/
+- Semantic Scholar API: https://api.semanticscholar.org/
 
 **Community:**
 - GitHub Issues: Bug reports and feature requests
@@ -611,9 +724,10 @@ This portal was developed for the Taiji Collaboration and is hosted by ICTP-AP (
 - ICTP-AP for hosting and support
 - Hugo community for excellent documentation
 - GitHub for free hosting via GitHub Pages
+- Survey4GWML project for architecture inspiration
 
 ---
 
-**Last Updated**: 2025-04-09
-**Version**: 2.0.0
-**Status**: Production Ready (LIGO-style redesign)
+**Last Updated**: 2025-04-14
+**Version**: 3.0.0
+**Status**: Production Ready (Citation Tracking System)

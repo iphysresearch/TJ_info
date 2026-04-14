@@ -1,0 +1,32 @@
+# API Keys Configuration Template
+# Copy this file to api_keys.yaml and fill in your API keys
+# DO NOT commit api_keys.yaml to version control!
+
+# Semantic Scholar API
+# Get your key at: https://www.semanticscholar.org/product/api
+semantic_scholar:
+  api_key: "YOUR_SEMANTIC_SCHOLAR_API_KEY_HERE"
+  # Rate limit: 100 requests/5 minutes without key, 10,000/5 minutes with key
+
+# Crossref API
+# Polite pool email for better rate limits
+crossref:
+  email: "your.email@institution.edu"
+  # No API key needed, but providing email gets you in the "polite pool"
+
+# INSPIRE-HEP API
+# No API key needed for basic access
+inspire:
+  # Optional: institution identifier for tracking
+  institution: "your-institution"
+
+# arXiv API
+# No API key needed
+arxiv:
+  # Rate limit: 1 request per 3 seconds recommended
+  rate_limit_seconds: 3
+
+# NASA/ADS API (optional, for astronomy papers)
+# Get your key at: https://ui.adsabs.harvard.edu/user/settings/token
+ads:
+  api_key: "YOUR_ADS_API_KEY_HERE"

@@ -1,0 +1,210 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "project": "Taiji Publications",
+    "created_date": "2025-04-09",
+    "last_updated": "2025-04-14",
+    "total_entries": 5,
+    "description": "太极空间引力波探测项目出版物数据库 / Taiji Space Gravitational Wave Detection Project Publications Database"
+  },
+  "entries": [
+    {
+      "entry_id": "10.1103/PhysRevD.111.084023",
+      "title": "Calibration of Taiji-2: A Comprehensive Analysis",
+      "authors": [
+        {
+          "name": "Zhang Wei",
+          "affiliation": "Institute of Mechanics, Chinese Academy of Sciences"
+        },
+        {
+          "name": "Li Ming",
+          "affiliation": "University of Chinese Academy of Sciences"
+        }
+      ],
+      "year": 2025,
+      "journal": "Physical Review D",
+      "doi": "10.1103/PhysRevD.111.084023",
+      "arxiv_id": "2603.25327",
+      "keywords": [
+        "calibration",
+        "mission design",
+        "instrumentation"
+      ],
+      "publication_type": "journal",
+      "featured": true,
+      "citation_count": 0,
+      "classification": {
+        "research_area": "pathfinder",
+        "source_types": [],
+        "methods": [
+          "simulation"
+        ],
+        "relevance_score": 1.0
+      }
+    },
+    {
+      "entry_id": "10.1088/1361-6382/ad2345",
+      "title": "GPU-Accelerated Parameter Estimation for Space-Based Gravitational Wave Detectors",
+      "authors": [
+        {
+          "name": "Niu Jianwei",
+          "affiliation": "Institute of Applied Mathematics, Chinese Academy of Sciences"
+        },
+        {
+          "name": "Feng Yikun",
+          "affiliation": "University of Chinese Academy of Sciences"
+        },
+        {
+          "name": "Zhao Wen",
+          "affiliation": "University of Science and Technology of China"
+        }
+      ],
+      "year": 2025,
+      "journal": "Classical and Quantum Gravity",
+      "doi": "10.1088/1361-6382/ad2345",
+      "arxiv_id": "2602.12011",
+      "keywords": [
+        "data analysis",
+        "parameter estimation",
+        "GPU computing",
+        "Bayesian methods"
+      ],
+      "publication_type": "journal",
+      "featured": true,
+      "citation_count": 0,
+      "classification": {
+        "research_area": "data_analysis",
+        "source_types": [
+          "mbhb"
+        ],
+        "methods": [
+          "parameter_estimation",
+          "data_analysis"
+        ],
+        "relevance_score": 0.9
+      }
+    },
+    {
+      "entry_id": "10.3847/2041-8213/ad3456",
+      "title": "Detection and Characterization of Verification Binaries for Taiji",
+      "authors": [
+        {
+          "name": "Yu Shenghua",
+          "affiliation": "National Astronomical Observatories, Chinese Academy of Sciences"
+        },
+        {
+          "name": "Wang Chen",
+          "affiliation": "Tsinghua University"
+        },
+        {
+          "name": "Liu Jian",
+          "affiliation": "Beijing Normal University"
+        }
+      ],
+      "year": 2025,
+      "journal": "The Astrophysical Journal",
+      "doi": "10.3847/2041-8213/ad3456",
+      "arxiv_id": "2603.01330",
+      "keywords": [
+        "verification binaries",
+        "white dwarfs",
+        "data analysis",
+        "mission design"
+      ],
+      "publication_type": "journal",
+      "featured": false,
+      "citation_count": 0,
+      "classification": {
+        "research_area": "science_case",
+        "source_types": [
+          "verification_binary",
+          "galactic_binary"
+        ],
+        "methods": [
+          "data_analysis"
+        ],
+        "relevance_score": 1.0
+      }
+    },
+    {
+      "entry_id": "10.1103/PhysRevLett.134.121101",
+      "title": "Three-Band Dark-Siren Cosmology with Taiji, LISA, and Ground-Based Detectors",
+      "authors": [
+        {
+          "name": "Song Yijie",
+          "affiliation": "School of Physics, Sun Yat-sen University"
+        },
+        {
+          "name": "Chen Ziming",
+          "affiliation": "Kavli Institute for Astronomy and Astrophysics, Peking University"
+        },
+        {
+          "name": "Fan Xilong",
+          "affiliation": "Purple Mountain Observatory, Chinese Academy of Sciences"
+        }
+      ],
+      "year": 2025,
+      "journal": "Physical Review Letters",
+      "doi": "10.1103/PhysRevLett.134.121101",
+      "arxiv_id": "2603.13080",
+      "keywords": [
+        "cosmology",
+        "dark-siren",
+        "multi-band observations",
+        "Hubble constant"
+      ],
+      "publication_type": "journal",
+      "featured": true,
+      "citation_count": 0,
+      "classification": {
+        "research_area": "science_case",
+        "source_types": [
+          "cosmological",
+          "mbhb"
+        ],
+        "methods": [
+          "data_analysis",
+          "parameter_estimation"
+        ],
+        "relevance_score": 1.0
+      }
+    },
+    {
+      "entry_id": "10.1088/1361-6382/ad8901",
+      "title": "Time-Delay Interferometry for Taiji: Algorithms and Implementation",
+      "authors": [
+        {
+          "name": "Huang Shuanglin",
+          "affiliation": "Institute of Mechanics, Chinese Academy of Sciences"
+        },
+        {
+          "name": "Gong Xuefei",
+          "affiliation": "Institute of Mechanics, Chinese Academy of Sciences"
+        }
+      ],
+      "year": 2024,
+      "journal": "Classical and Quantum Gravity",
+      "doi": "10.1088/1361-6382/ad8901",
+      "arxiv_id": "2411.08765",
+      "keywords": [
+        "time-delay interferometry",
+        "data analysis",
+        "laser noise",
+        "instrumentation"
+      ],
+      "publication_type": "journal",
+      "featured": false,
+      "citation_count": 0,
+      "classification": {
+        "research_area": "data_analysis",
+        "source_types": [],
+        "methods": [
+          "tdi",
+          "data_analysis",
+          "noise_modeling"
+        ],
+        "relevance_score": 1.0
+      }
+    }
+  ]
+}

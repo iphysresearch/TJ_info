@@ -1,0 +1,25 @@
+# TJ_info Citation Tracking System - Python Dependencies
+
+# YAML processing
+PyYAML>=6.0
+
+# HTTP requests for API calls
+requests>=2.28.0
+
+# BibTeX parsing and generation
+bibtexparser>=1.4.0
+
+# Date handling
+python-dateutil>=2.8.0
+
+# JSON Schema validation
+jsonschema>=4.17.0
+
+# String similarity for duplicate detection
+python-Levenshtein>=0.20.0
+
+# Progress bars for long operations
+tqdm>=4.65.0
+
+# Rich terminal output (optional but recommended)
+rich>=13.0.0

@@ -19,9 +19,23 @@ __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
+venv/
+.venv/
 
 # Logs
 *.log
 
 # Temporary files
 *.tmp
+
+# API Keys (never commit!)
+config/api_keys.yaml
+
+# Cache files
+data/api_cache/
+
+# Backup files
+data/*.backup.*.json
+
+# Reports (generated)
+reports/*.json

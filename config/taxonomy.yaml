@@ -1,0 +1,210 @@
+# Taiji Publications Classification Taxonomy
+# 太极出版物分类体系
+
+# Research Areas (研究领域)
+research_areas:
+  mission_design:
+    name: "Mission Design"
+    name_zh: "任务设计"
+    description: "Orbital mechanics, constellation design, mission planning"
+    keywords:
+      - "mission"
+      - "constellation"
+      - "orbit"
+      - "formation flying"
+      - "deployment"
+
+  instrument:
+    name: "Instrumentation"
+    name_zh: "仪器技术"
+    description: "Laser systems, interferometry, drag-free control"
+    keywords:
+      - "laser"
+      - "interferometry"
+      - "drag-free"
+      - "accelerometer"
+      - "optical bench"
+      - "calibration"
+      - "instrumentation"
+
+  data_analysis:
+    name: "Data Analysis"
+    name_zh: "数据分析"
+    description: "Signal processing, parameter estimation, noise modeling"
+    keywords:
+      - "data analysis"
+      - "parameter estimation"
+      - "signal processing"
+      - "noise"
+      - "filtering"
+      - "Bayesian"
+      - "MCMC"
+
+  source_modeling:
+    name: "Source Modeling"
+    name_zh: "波源建模"
+    description: "Waveform modeling, source population studies"
+    keywords:
+      - "waveform"
+      - "template"
+      - "post-Newtonian"
+      - "numerical relativity"
+      - "population"
+
+  science_case:
+    name: "Science Case"
+    name_zh: "科学目标"
+    description: "Astrophysics, cosmology, fundamental physics"
+    keywords:
+      - "cosmology"
+      - "astrophysics"
+      - "fundamental physics"
+      - "tests of GR"
+      - "dark matter"
+      - "dark energy"
+
+  pathfinder:
+    name: "Pathfinder"
+    name_zh: "先导实验"
+    description: "Technology demonstration, Taiji-1, Taiji-2"
+    keywords:
+      - "pathfinder"
+      - "Taiji-1"
+      - "Taiji-2"
+      - "technology demonstration"
+      - "in-orbit test"
+
+# Gravitational Wave Source Types (引力波源类型)
+source_types:
+  mbhb:
+    name: "Massive Black Hole Binaries"
+    name_zh: "大质量黑洞双星"
+    description: "Coalescence of massive black holes (10^4 - 10^7 solar masses)"
+    keywords:
+      - "massive black hole"
+      - "MBH"
+      - "MBHB"
+      - "supermassive"
+      - "binary black hole"
+
+  emri:
+    name: "Extreme Mass Ratio Inspirals"
+    name_zh: "极端质量比旋近"
+    description: "Stellar-mass objects spiraling into massive black holes"
+    keywords:
+      - "EMRI"
+      - "extreme mass ratio"
+      - "inspiral"
+      - "Kerr"
+
+  galactic_binary:
+    name: "Galactic Binaries"
+    name_zh: "银河系双星"
+    description: "Compact binaries in the Milky Way"
+    keywords:
+      - "galactic binary"
+      - "white dwarf"
+      - "compact binary"
+      - "ultra-compact"
+
+  sgwb:
+    name: "Stochastic Background"
+    name_zh: "随机引力波背景"
+    description: "Cosmological and astrophysical backgrounds"
+    keywords:
+      - "stochastic"
+      - "background"
+      - "SGWB"
+      - "cosmological"
+      - "primordial"
+
+  verification_binary:
+    name: "Verification Binaries"
+    name_zh: "验证双星"
+    description: "Known sources for detector calibration"
+    keywords:
+      - "verification"
+      - "calibration source"
+      - "known binary"
+
+  cosmological:
+    name: "Cosmological Sources"
+    name_zh: "宇宙学源"
+    description: "Sources related to cosmology measurements"
+    keywords:
+      - "standard siren"
+      - "dark siren"
+      - "Hubble"
+      - "cosmological"
+
+# Analysis Methods (分析方法)
+methods:
+  data_analysis:
+    name: "Data Analysis"
+    name_zh: "数据分析"
+    keywords:
+      - "data analysis"
+      - "signal processing"
+
+  waveform_modeling:
+    name: "Waveform Modeling"
+    name_zh: "波形建模"
+    keywords:
+      - "waveform"
+      - "template"
+      - "model"
+
+  parameter_estimation:
+    name: "Parameter Estimation"
+    name_zh: "参数估计"
+    keywords:
+      - "parameter estimation"
+      - "PE"
+      - "Bayesian"
+      - "MCMC"
+      - "nested sampling"
+
+  noise_modeling:
+    name: "Noise Modeling"
+    name_zh: "噪声建模"
+    keywords:
+      - "noise"
+      - "PSD"
+      - "characterization"
+
+  tdi:
+    name: "Time-Delay Interferometry"
+    name_zh: "时延干涉"
+    keywords:
+      - "TDI"
+      - "time-delay interferometry"
+      - "laser noise"
+
+  simulation:
+    name: "Simulation"
+    name_zh: "模拟"
+    keywords:
+      - "simulation"
+      - "mock data"
+      - "injection"
+
+# Relevance Keywords for Taiji (太极相关性关键词)
+taiji_relevance_keywords:
+  high_relevance:
+    - "Taiji"
+    - "太极"
+    - "LISA-Taiji"
+    - "Taiji-LISA"
+
+  medium_relevance:
+    - "space-based gravitational wave"
+    - "millihertz"
+    - "mHz"
+    - "LISA"
+    - "TianQin"
+    - "space gravitational wave"
+
+  low_relevance:
+    - "gravitational wave"
+    - "gravitational radiation"
+    - "GW"

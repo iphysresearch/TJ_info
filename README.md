@@ -14,8 +14,10 @@ This portal provides a comprehensive, searchable collection of:
 - **Responsive design** optimized for mobile and desktop
 - **Easy contribution workflow** via GitHub pull requests
 - **Automated validation** of submitted content
-- **BibTeX export** functionality
+- **BibTeX/CSV/JSON export** functionality
+- **Citation tracking** via Semantic Scholar API
 - **Multi-band search** across titles, authors, and keywords
+- **Taiji relevance scoring** for automatic classification
 
 ## Quick Start
 
@@ -43,12 +45,61 @@ Visit the live site at: [https://taiji-publications.github.io/](https://taiji-pu
    cd TJ_info
    ```
 
-3. Start the development server:
+3. Install Python dependencies:
    ```bash
+   make install
+   # or
+   pip install -r requirements.txt
+   ```
+
+4. Start the development server:
+   ```bash
+   make serve
+   # or
    hugo server -D
    ```
 
-4. Open your browser to `http://localhost:1313`
+5. Open your browser to `http://localhost:1313`
+
+## Makefile Commands
+
+All development tasks are available via `make`:
+
+```bash
+make help              # Show all available commands
+
+# Environment
+make install           # Install Python dependencies
+make check-deps        # Check if dependencies are installed
+
+# Database Operations
+make validate          # Run all validation checks
+make stats             # Show database statistics
+make report            # Generate quality report
+
+# Adding Papers
+make add-doi DOI=xxx   # Add paper by DOI
+make add-arxiv ID=xxx  # Add paper by arXiv ID
+make add-interactive   # Interactive paper addition
+
+# Citation Tracking
+make find-citations ARXIV=xxx    # Find citations for paper
+make find-citations-auto ARXIV=xxx  # Auto-add relevant citations
+make update-citations            # Update all citation counts
+
+# Export
+make export            # Export to all formats (BibTeX, CSV, JSON, Markdown)
+make export-bibtex     # Export to BibTeX
+make export-csv        # Export to CSV
+
+# Hugo Site
+make serve             # Start dev server
+make build             # Build static site
+make sync              # Sync database to Hugo content
+
+# Workflows
+make deploy            # Full deploy: validate → sync → export → build
+```
 
 ## Contributing
 
@@ -62,6 +113,21 @@ We welcome contributions from the community! See [CONTRIBUTING.md](CONTRIBUTING.
 4. Submit a pull request
 
 ### Adding a Publication
+
+**Option 1: Via Makefile (Recommended)**
+
+```bash
+# Add by DOI
+make add-doi DOI=10.1103/PhysRevD.100.022003
+
+# Add by arXiv ID
+make add-arxiv ID=2401.12345
+
+# Interactive mode
+make add-interactive
+```
+
+**Option 2: Manual Entry**
 
 Create a new file in `content/publications/` with the format `YYYY-MM-DD-short-title.md`:
 
@@ -114,14 +180,27 @@ TJ_info/
 ├── .github/              # GitHub Actions workflows and templates
 ├── archetypes/           # Content templates
 ├── assets/               # CSS and JavaScript
+├── config/               # Configuration files (taxonomy, schema)
 ├── content/              # Markdown content files
 │   ├── publications/     # Publication entries
 │   ├── talks/            # Talk entries
 │   └── contribute/       # Contribution guidelines
-├── data/                 # Data files
+├── data/                 # JSON database and cache
+│   ├── papers.json       # Main publications database
+│   └── api_cache/        # API response cache
+├── database/             # Export files (BibTeX, CSV, etc.)
 ├── layouts/              # Hugo templates
-├── scripts/              # Validation scripts
+├── reports/              # Generated quality reports
+├── scripts/              # Python scripts
+│   ├── lib/              # Core libraries (api_client, db_manager, etc.)
+│   ├── add_paper.py      # Add papers by DOI/arXiv
+│   ├── find_citations.py # Citation tracking
+│   ├── sync_database.py  # Sync DB to Hugo
+│   ├── export_data.py    # Multi-format export
+│   └── validate_data.py  # Database validation
 ├── static/               # Static assets (images, downloads)
+├── Makefile              # Development commands
+├── requirements.txt      # Python dependencies
 ├── hugo.toml             # Hugo configuration
 └── README.md             # This file
 ```
@@ -129,35 +208,68 @@ TJ_info/
 ## Technology Stack
 
 - **Static Site Generator**: Hugo (extended)
-- **Styling**: Custom SCSS with Taiji branding
+- **Styling**: Custom SCSS with LIGO-inspired design
 - **Deployment**: GitHub Pages via GitHub Actions
-- **Validation**: Python scripts for YAML schema validation
+- **Database**: JSON with Python management scripts
+- **Citation Tracking**: Semantic Scholar, Crossref, arXiv, INSPIRE-HEP APIs
+- **Validation**: Python scripts with JSON Schema
 
 ## Design
 
-The site uses the Taiji/ICTP-AP color scheme:
-- Primary color: Dark red (#8c0000)
-- Clean, responsive layout
-- LIGO-inspired publication tables
-- Mobile-first design approach
+The site uses a LIGO-inspired academic design:
+- Clean white background
+- Navy blue (#000080) links and borders
+- Light steel blue table headers
+- Minimal, content-focused layout
+- Mobile-first responsive design
+
+## Citation Tracking
+
+The portal includes a citation tracking system that:
+- Fetches paper metadata from arXiv, Crossref, and Semantic Scholar
+- Tracks citations using Semantic Scholar API
+- Scores papers for Taiji relevance automatically
+- Exports to BibTeX, CSV, JSON, and Markdown
+
+### Updating Citation Counts
+
+```bash
+make update-citations
+```
+
+### Finding New Relevant Papers
+
+```bash
+# Find papers citing a Taiji publication
+make find-citations ARXIV=2401.12345
+
+# Auto-add papers with high relevance
+make find-citations-auto ARXIV=2401.12345 MIN_REL=0.5
+```
 
 ## Maintenance
 
 ### Validation
 
-Run validation scripts locally before submitting:
+```bash
+make validate
+```
+
+### Export
 
 ```bash
-python scripts/validate-publication.py
-python scripts/validate-talk.py
+# Export to all formats
+make export
+
+# Specific format
+make export-bibtex
+make export-csv
 ```
 
 ### Building
 
-Build the site locally:
-
 ```bash
-hugo --gc --minify
+make build
 ```
 
 The generated site will be in the `public/` directory.
@@ -170,7 +282,7 @@ This project is open source. Content contributions should be properly attributed
 
 For questions or issues, please:
 - Open an issue on GitHub
-- Contact the maintainers at [contact information]
+- Contact the maintainers
 
 ## Acknowledgments
 
