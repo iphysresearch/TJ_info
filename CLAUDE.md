@@ -2,8 +2,8 @@
 
 **Project**: Taiji Publications & Talks Portal
 **Created**: 2025-04-09
-**Last Updated**: 2025-04-14
-**Status**: Citation Tracking System Implemented (v3.0.0)
+**Last Updated**: 2026-04-22
+**Status**: Institution Data System Added (v3.1.0)
 
 ---
 
@@ -20,6 +20,7 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 - Maintain high data quality through automated validation
 - Present content in an accessible, responsive design
 - **Track citations and discover related papers automatically**
+- **Archive Taiji Alliance member institution data**
 
 **Technology Stack:**
 - **Static Site Generator**: Hugo (extended version)
@@ -41,6 +42,7 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 - 通过自动验证保持高数据质量
 - 以可访问、响应式的设计呈现内容
 - **自动追踪引用并发现相关论文**
+- **存档太极联盟成员单位数据**
 
 **技术栈：**
 - **静态站点生成器**：Hugo（扩展版本）
@@ -131,6 +133,7 @@ TJ_info/
 │
 ├── data/
 │   ├── papers.json                 # [NEW] Main publications database
+│   ├── institutions.json           # [NEW] Taiji Alliance member institutions
 │   ├── citations_cache.json        # [NEW] Citation relationships
 │   └── api_cache/                  # [NEW] API response cache
 │       ├── arxiv/
@@ -171,6 +174,7 @@ TJ_info/
 │   │   ├── classifier.py           # Taiji relevance scoring
 │   │   └── validator.py            # Data validation
 │   │
+│   ├── import_institutions.py       # [NEW] Import institution data from Excel
 │   ├── add_paper.py                # [NEW] Add papers by DOI/arXiv
 │   ├── find_citations.py           # [NEW] Citation tracking
 │   ├── sync_database.py            # [NEW] Sync DB to Hugo
@@ -276,6 +280,80 @@ INSPIRE-HEP ──────┘              └──→ content/publications
 
 ---
 
+## Institution Data System
+
+### Overview
+
+The institution data system archives Taiji Alliance member institutions with bilingual names (Chinese/English), classification (partner vs. affiliate), and cooperation types.
+
+### Data Source
+
+- **Excel file**: `太极联盟信息整理.xlsx`
+- **Sheet "成员单位"**: 65 institutions, 2 columns (name_zh, name_en), 28 with English names
+- **Sheet "成员单位英文"**: 29 official partners, 4 columns (序号, name_zh, name_en, cooperation)
+
+### Database Structure (`data/institutions.json`)
+
+```json
+{
+  "metadata": {
+    "version": "1.0",
+    "project": "Taiji Alliance Institutions",
+    "created_date": "2026-04-22",
+    "last_updated": "2026-04-22",
+    "total_entries": 65,
+    "description": "太极联盟成员单位数据库",
+    "data_source": "太极联盟信息整理.xlsx",
+    "statistics": {
+      "official_partners": 29,
+      "affiliate_institutions": 36
+    }
+  },
+  "entries": [
+    {
+      "entry_id": "peking-university",
+      "name_zh": "北京大学",
+      "name_en": "Peking University",
+      "institution_type": "partner",
+      "cooperation_types": ["科学研究"]
+    }
+  ]
+}
+```
+
+### Field Reference
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `entry_id` | string | yes | URL-friendly slug derived from English name |
+| `name_zh` | string | yes | Chinese name |
+| `name_en` | string | yes | English name (all 65 filled) |
+| `institution_type` | string | yes | `"partner"` (29) or `"affiliate"` (36) |
+| `cooperation_types` | array/null | no | Cooperation categories (partners only), kept in Chinese |
+
+### Import Script (`scripts/import_institutions.py`)
+
+The import script reads the Excel file, merges both sheets, and produces `data/institutions.json`.
+
+**Data corrections applied automatically:**
+- Leading whitespace stripped from institution names (e.g. " 中国科学院南京天文光学技术研究所")
+- Typo "南阳理工大学" mapped to "南洋理工大学" for correct matching
+- English typo "Nanyang TechnologicalUniversity" fixed to "Nanyang Technological University"
+- "Mississippi State /West Lake University" preserved as-is in `name_zh`
+- 37 missing English names filled via embedded mapping table
+- Duplicate `entry_id` slugs auto-resolved with numeric suffix
+
+**Usage:**
+```bash
+# Via Makefile
+make import-institutions INPUT=/path/to/太极联盟信息整理.xlsx
+
+# Direct
+python3 scripts/import_institutions.py --input /path/to/file.xlsx --output data/institutions.json
+```
+
+---
+
 ## Common Tasks
 
 ### Using Makefile Commands
@@ -345,6 +423,16 @@ make export-csv
 
 # Sync database to Hugo content
 make sync
+```
+
+### Institution Management
+
+```bash
+# Import institutions from Excel file
+make import-institutions INPUT=/path/to/太极联盟信息整理.xlsx
+
+# Validate output
+python3 -m json.tool data/institutions.json > /dev/null
 ```
 
 ### Hugo Site
@@ -491,6 +579,29 @@ The site follows the LIGO Papers page design philosophy:
 
 ## Modification History
 
+### 2026-04-22: Institution Data System (v3.1.0)
+
+**New Feature:**
+- Taiji Alliance member institution database (`data/institutions.json`)
+- Import script to parse Excel source data with automatic data corrections
+- Makefile target `import-institutions` for repeatable import
+
+**New Files Created:**
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `data/institutions.json` | ~536 | 65 institution entries (29 partners, 36 affiliates) |
+| `scripts/import_institutions.py` | ~210 | Excel-to-JSON import with data corrections |
+
+**Data Corrections:**
+- Leading whitespace stripped from "中国科学院南京天文光学技术研究所"
+- Typo "南阳理工大学" → "南洋理工大学" (partner sheet matching)
+- "Nanyang TechnologicalUniversity" → "Nanyang Technological University"
+- 37 missing English institution names filled via embedded mapping
+
+**Modified Files:**
+- `Makefile` — Added `import-institutions` target and help text
+
 ### 2025-04-14: Citation Tracking System (v3.0.0)
 
 **Major Feature Addition:**
@@ -553,13 +664,14 @@ The site follows the LIGO Papers page design philosophy:
 
 ## Future Enhancements
 
-### Completed (v3.0.0)
+### Completed (v3.1.0)
 
 - [x] BibTeX Export
 - [x] Citation tracking
 - [x] Statistics/Quality reports
 - [x] Multi-format export (CSV, JSON, Markdown)
 - [x] Integration with INSPIRE-HEP
+- [x] Taiji Alliance institution database
 
 ### Short-term (Next 3 months)
 
@@ -728,6 +840,6 @@ This portal was developed for the Taiji Collaboration and is hosted by ICTP-AP (
 
 ---
 
-**Last Updated**: 2025-04-14
-**Version**: 3.0.0
-**Status**: Production Ready (Citation Tracking System)
+**Last Updated**: 2026-04-22
+**Version**: 3.1.0
+**Status**: Production Ready (Institution Data System)

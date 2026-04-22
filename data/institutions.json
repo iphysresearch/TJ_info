@@ -1,0 +1,537 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "project": "Taiji Alliance Institutions",
+    "created_date": "2026-04-22",
+    "last_updated": "2026-04-22",
+    "total_entries": 65,
+    "description": "太极联盟成员单位数据库",
+    "data_source": "太极联盟信息整理.xlsx",
+    "statistics": {
+      "official_partners": 29,
+      "affiliate_institutions": 36
+    }
+  },
+  "entries": [
+    {
+      "entry_id": "peking-university",
+      "name_zh": "北京大学",
+      "name_en": "Peking University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "beijing-institute-of-technology",
+      "name_zh": "北京理工大学",
+      "name_en": "Beijing Institute of Technology",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "beijing-normal-university",
+      "name_zh": "北京师范大学",
+      "name_en": "Beijing Normal University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究",
+        "学生培养"
+      ]
+    },
+    {
+      "entry_id": "northeastern-university",
+      "name_zh": "东北大学",
+      "name_en": "Northeastern University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "hangzhou-institute-for-advanced-study",
+      "name_zh": "国科大杭州高等研究院",
+      "name_en": "Hangzhou Institute for Advanced Study, UCAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "平台建设",
+        "学生培养"
+      ]
+    },
+    {
+      "entry_id": "harbin-institute-of-technology",
+      "name_zh": "哈尔滨工业大学",
+      "name_en": "Harbin Institute of Technology",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "hunan-university",
+      "name_zh": "湖南大学",
+      "name_en": "Hunan University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "论坛活动"
+      ]
+    },
+    {
+      "entry_id": "lanzhou-university",
+      "name_zh": "兰州大学",
+      "name_en": "Lanzhou University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "lanzhou-institute-of-physicst",
+      "name_zh": "兰州空间技术物理研究所",
+      "name_en": "Lanzhou Institute of Physics, CAST",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "nanjing-university",
+      "name_zh": "南京大学",
+      "name_en": "Nanjing University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "论坛活动",
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "china-jinping-underground-laboratory",
+      "name_zh": "中国锦屏地下实验室",
+      "name_en": "China Jinping Underground Laboratory",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "平台建设"
+      ]
+    },
+    {
+      "entry_id": "tianjin-university",
+      "name_zh": "天津大学",
+      "name_en": "Tianjin University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "shandong-university",
+      "name_zh": "山东大学",
+      "name_en": "Shandong University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "论坛活动"
+      ]
+    },
+    {
+      "entry_id": "zhejiang-university",
+      "name_zh": "浙江大学",
+      "name_en": "Zhejiang University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究",
+        "论坛活动"
+      ]
+    },
+    {
+      "entry_id": "institute-of-high-energy-physics",
+      "name_zh": "中国科学院高能物理研究所",
+      "name_en": "Institute of High Energy Physics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "national-space-science-center",
+      "name_zh": "中国科学院国家空间科学中心",
+      "name_en": "National Space Science Center, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "national-astronomical-observatories",
+      "name_zh": "中国科学院国家天文台",
+      "name_en": "National Astronomical Observatories, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究",
+        "学生培养"
+      ]
+    },
+    {
+      "entry_id": "innovation-academy-for-precision-measurement-science-and-technology",
+      "name_zh": "中国科学院精密测量科学与技术创新研究院",
+      "name_en": "Innovation Academy for Precision Measurement Science and Technology, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "institute-of-theoretical-physics",
+      "name_zh": "中国科学院理论物理研究所",
+      "name_en": "Institute of Theoretical Physics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究",
+        "学生培养"
+      ]
+    },
+    {
+      "entry_id": "institute-of-mechanics",
+      "name_zh": "中国科学院力学研究所",
+      "name_en": "Institute of Mechanics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究",
+        "学生培养"
+      ]
+    },
+    {
+      "entry_id": "shanghai-institute-of-optics-and-fine-mechanics",
+      "name_zh": "中国科学院上海光学精密机械研究所",
+      "name_en": "Shanghai Institute of Optics and Fine Mechanics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "shanghai-institute-of-technical-physics",
+      "name_zh": "中国科学院上海技术物理研究所",
+      "name_en": "Shanghai Institute of Technical Physics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "shanghai-astronomical-observatory",
+      "name_zh": "中国科学院上海天文台",
+      "name_en": "Shanghai Astronomical Observatory, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "academy-of-mathematics-and-systems-science",
+      "name_zh": "中国科学院数学与系统科学研究院",
+      "name_en": "Academy of Mathematics and Systems Science, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "innovation-academy-for-microsatellites",
+      "name_zh": "中国科学院微小卫星创新研究院",
+      "name_en": "Innovation Academy for Microsatellites, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "institute-of-physics",
+      "name_zh": "中国科学院物理研究所",
+      "name_en": "Institute of Physics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "changchun-institute-of-optics-fine-mechanics-and-physics",
+      "name_zh": "中国科学院长春光学精密机械与物理研究所",
+      "name_en": "Changchun Institute of Optics, Fine Mechanics and Physics, CAS",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "nanjing-institute-of-astronomical-optics-and-technology",
+      "name_zh": "中国科学院南京天文光学技术研究所",
+      "name_en": "Nanjing Institute of Astronomical Optics & Technology, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "mississippi-state-westlake-university",
+      "name_zh": "Mississippi State /West Lake University",
+      "name_en": "Mississippi State / Westlake University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "dalian-university-of-technology",
+      "name_zh": "大连理工大学",
+      "name_en": "Dalian University of Technology",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "fudan-university",
+      "name_zh": "复旦大学",
+      "name_en": "Fudan University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "hainan-tropical-ocean-university",
+      "name_zh": "海南热带海洋学院",
+      "name_en": "Hainan Tropical Ocean University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "hangzhou-dianzi-university",
+      "name_zh": "杭州电子科技大学",
+      "name_en": "Hangzhou Dianzi University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "hangzhou-normal-university",
+      "name_zh": "杭州师范大学",
+      "name_en": "Hangzhou Normal University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "hunan-normal-university",
+      "name_zh": "湖南师范大学",
+      "name_en": "Hunan Normal University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "central-china-normal-university",
+      "name_zh": "华中师范大学",
+      "name_en": "Central China Normal University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "jilin-university",
+      "name_zh": "吉林大学",
+      "name_en": "Jilin University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "center-for-space-science-and-applied-research",
+      "name_zh": "空间科学与应用研究中心",
+      "name_en": "Center for Space Science and Applied Research",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "t-d-lee-institute-national-taiwan-university",
+      "name_zh": "李政道研究所／台湾大学",
+      "name_en": "T.D. Lee Institute / National Taiwan University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "liaoning-normal-university",
+      "name_zh": "辽宁师范大学",
+      "name_en": "Liaoning Normal University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "university-of-south-china",
+      "name_zh": "南华大学",
+      "name_en": "University of South China",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "nankai-university",
+      "name_zh": "南开大学",
+      "name_en": "Nankai University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "nanyang-technological-university",
+      "name_zh": "南洋理工大学",
+      "name_en": "Nanyang Technological University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "tsinghua-university",
+      "name_zh": "清华大学",
+      "name_en": "Tsinghua University",
+      "institution_type": "partner",
+      "cooperation_types": [
+        "科学研究"
+      ]
+    },
+    {
+      "entry_id": "shanxi-university",
+      "name_zh": "山西大学",
+      "name_en": "Shanxi University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "shanghai-jiao-tong-university",
+      "name_zh": "上海交通大学",
+      "name_en": "Shanghai Jiao Tong University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "national-tsing-hua-university",
+      "name_zh": "台湾清华大学",
+      "name_en": "National Tsing Hua University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "tongji-university",
+      "name_zh": "同济大学",
+      "name_en": "Tongji University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "wuhan-university",
+      "name_zh": "武汉大学",
+      "name_en": "Wuhan University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "yantai-university",
+      "name_zh": "烟台大学",
+      "name_en": "Yantai University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "yangzhou-university",
+      "name_zh": "扬州大学",
+      "name_en": "Yangzhou University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "zhengzhou-university",
+      "name_zh": "郑州大学",
+      "name_en": "Zhengzhou University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "cetc-26th-research-institute",
+      "name_zh": "中电26所",
+      "name_en": "CETC 26th Research Institute",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "national-institute-of-metrology",
+      "name_zh": "中国计量科学研究院",
+      "name_en": "National Institute of Metrology, China",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "university-of-science-and-technology-of-china",
+      "name_zh": "中国科学技术大学",
+      "name_en": "University of Science and Technology of China",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "institute-of-engineering-thermophysics",
+      "name_zh": "中国科学院工程热物理研究所",
+      "name_en": "Institute of Engineering Thermophysics, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "national-time-service-center",
+      "name_zh": "中国科学院国家授时中心",
+      "name_en": "National Time Service Center, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "hefei-institutes-of-physical-science",
+      "name_zh": "中国科学院合肥物质科学研究院",
+      "name_en": "Hefei Institutes of Physical Science, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "institute-of-software",
+      "name_zh": "中国科学院软件研究所",
+      "name_en": "Institute of Software, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "shanghai-institute-of-microsystem-and-information-technology",
+      "name_zh": "中国科学院上海微系统与信息技术研究所",
+      "name_en": "Shanghai Institute of Microsystem and Information Technology, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "suzhou-institute-of-biomedical-engineering-and-technology",
+      "name_zh": "中国科学院苏州医工所",
+      "name_en": "Suzhou Institute of Biomedical Engineering and Technology, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "wuhan-institute-of-physics-and-mathematics",
+      "name_zh": "中国科学院武汉物理与数学研究所",
+      "name_en": "Wuhan Institute of Physics and Mathematics, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "yunnan-observatories",
+      "name_zh": "中国科学院云南天文台",
+      "name_en": "Yunnan Observatories, CAS",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "chongqing-university",
+      "name_zh": "重庆大学",
+      "name_en": "Chongqing University",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    },
+    {
+      "entry_id": "chongqing-acousto-optoelectronics-co-ltd",
+      "name_zh": "重庆声光电有限公司",
+      "name_en": "Chongqing Acousto-Optoelectronics Co., Ltd.",
+      "institution_type": "affiliate",
+      "cooperation_types": null
+    }
+  ]
+}

@@ -18,6 +18,7 @@ This portal provides a comprehensive, searchable collection of:
 - **Citation tracking** via Semantic Scholar API
 - **Multi-band search** across titles, authors, and keywords
 - **Taiji relevance scoring** for automatic classification
+- **Institution database** for Taiji Alliance member organizations
 
 ## Quick Start
 
@@ -99,6 +100,9 @@ make sync              # Sync database to Hugo content
 
 # Workflows
 make deploy            # Full deploy: validate → sync → export → build
+
+# Institutions
+make import-institutions INPUT=file.xlsx  # Import institution data from Excel
 ```
 
 ## Contributing
@@ -187,6 +191,7 @@ TJ_info/
 │   └── contribute/       # Contribution guidelines
 ├── data/                 # JSON database and cache
 │   ├── papers.json       # Main publications database
+│   ├── institutions.json # Taiji Alliance member institutions
 │   └── api_cache/        # API response cache
 ├── database/             # Export files (BibTeX, CSV, etc.)
 ├── layouts/              # Hugo templates
@@ -194,6 +199,7 @@ TJ_info/
 ├── scripts/              # Python scripts
 │   ├── lib/              # Core libraries (api_client, db_manager, etc.)
 │   ├── add_paper.py      # Add papers by DOI/arXiv
+│   ├── import_institutions.py  # Import institution data from Excel
 │   ├── find_citations.py # Citation tracking
 │   ├── sync_database.py  # Sync DB to Hugo
 │   ├── export_data.py    # Multi-format export
@@ -246,6 +252,22 @@ make find-citations ARXIV=2401.12345
 # Auto-add papers with high relevance
 make find-citations-auto ARXIV=2401.12345 MIN_REL=0.5
 ```
+
+## Institution Data
+
+The portal maintains a structured database of 65 Taiji Alliance member institutions (`data/institutions.json`), including bilingual names and cooperation types.
+
+- **29 official partners** with cooperation categories
+- **36 affiliate institutions**
+- All entries have Chinese and English names
+
+### Importing Institution Data
+
+```bash
+make import-institutions INPUT=/path/to/太极联盟信息整理.xlsx
+```
+
+The import script automatically handles data corrections (typo fixes, whitespace cleanup, missing English name completion).
 
 ## Maintenance
 

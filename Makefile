@@ -6,7 +6,9 @@
 .PHONY: help install validate add-paper find-citations sync export serve deploy \
         validate-format validate-dupes validate-citations add-doi add-arxiv \
         add-interactive find-citations-auto find-citations-dry update-citations \
-        export-bibtex export-csv build full-update report stats check-deps clean
+        find-citations-doi find-citations-doi-auto find-citations-doi-dry \
+        export-bibtex export-csv build full-update report stats check-deps clean \
+        fix-dates fix-authors import-institutions
 
 # Default Python interpreter
 PYTHON ?= python3
@@ -41,9 +43,12 @@ help:
 	@echo "   make add-interactive  - Interactive paper addition / 交互式添加论文"
 	@echo ""
 	@echo "🔗 Citation Tracking / 引用追踪"
-	@echo "   make find-citations ARXIV=xxx           - Find citations for paper"
-	@echo "   make find-citations-auto ARXIV=xxx      - Auto-add relevant citations"
-	@echo "   make find-citations-dry ARXIV=xxx       - Dry run (no changes)"
+	@echo "   make find-citations ARXIV=xxx           - Find citations (arXiv)"
+	@echo "   make find-citations-auto ARXIV=xxx      - Auto-add citations (arXiv)"
+	@echo "   make find-citations-dry ARXIV=xxx       - Dry run (arXiv)"
+	@echo "   make find-citations-doi DOI=xxx         - Find citations (DOI)"
+	@echo "   make find-citations-doi-auto DOI=xxx    - Auto-add citations (DOI)"
+	@echo "   make find-citations-doi-dry DOI=xxx     - Dry run (DOI)"
 	@echo "   make update-citations                   - Update all citation counts"
 	@echo ""
 	@echo "📤 Export / 导出"
@@ -55,6 +60,13 @@ help:
 	@echo "   make sync             - Sync database to Hugo content / 同步数据库到Hugo"
 	@echo "   make serve            - Start Hugo dev server / 启动Hugo开发服务器"
 	@echo "   make build            - Build static site / 构建静态站点"
+	@echo ""
+	@echo "🔧 Data Fixes / 数据修复"
+	@echo "   make fix-dates        - Fix paper dates via Crossref / 修复论文日期"
+	@echo "   make fix-authors      - Expand abbreviated author names / 展开缩写作者名"
+	@echo ""
+	@echo "🏛️  Institutions / 成员单位"
+	@echo "   make import-institutions INPUT=file.xlsx - Import institution data / 导入成员单位数据"
 	@echo ""
 	@echo "🚀 Workflows / 工作流"
 	@echo "   make deploy           - Full deploy: validate → sync → export → build"
@@ -157,6 +169,28 @@ endif
 	@echo "🔗 Dry run: finding citations for arXiv:$(ARXIV)..."
 	$(PYTHON) scripts/find_citations.py --arxiv "$(ARXIV)" --dry-run
 
+# DOI-based citation tracking
+find-citations-doi:
+ifndef DOI
+	$(error DOI is required. Usage: make find-citations-doi DOI=10.1103/PhysRevD.111.084023)
+endif
+	@echo "🔗 Finding citations for DOI:$(DOI)..."
+	$(PYTHON) scripts/find_citations.py --doi "$(DOI)" --limit $(LIMIT) --min-relevance $(MIN_REL)
+
+find-citations-doi-auto:
+ifndef DOI
+	$(error DOI is required. Usage: make find-citations-doi-auto DOI=xxx)
+endif
+	@echo "🔗 Auto-adding citations for DOI:$(DOI)..."
+	$(PYTHON) scripts/find_citations.py --doi "$(DOI)" --limit $(LIMIT) --min-relevance $(MIN_REL) --auto
+
+find-citations-doi-dry:
+ifndef DOI
+	$(error DOI is required. Usage: make find-citations-doi-dry DOI=xxx)
+endif
+	@echo "🔗 Dry run for DOI:$(DOI)..."
+	$(PYTHON) scripts/find_citations.py --doi "$(DOI)" --limit $(LIMIT) --min-relevance $(MIN_REL) --dry-run
+
 update-citations:
 	@echo "🔄 Updating citation counts for all papers..."
 	$(PYTHON) scripts/update_citations.py
@@ -175,6 +209,27 @@ export-bibtex:
 export-csv:
 	@echo "📤 Exporting to CSV..."
 	$(PYTHON) scripts/export_data.py --format csv --output database/papers.csv
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DATA FIXES / 数据修复
+# ═══════════════════════════════════════════════════════════════════════════════
+fix-dates:
+	@echo "📅 Fixing paper dates..."
+	$(PYTHON) scripts/fix_dates.py
+
+fix-authors:
+	@echo "👤 Fixing abbreviated author names..."
+	$(PYTHON) scripts/fix_authors.py
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INSTITUTIONS / 成员单位管理
+# ═══════════════════════════════════════════════════════════════════════════════
+import-institutions:
+ifndef INPUT
+	$(error INPUT is required. Usage: make import-institutions INPUT=/path/to/太极联盟信息整理.xlsx)
+endif
+	@echo "🏛️  Importing institution data..."
+	$(PYTHON) scripts/import_institutions.py --input "$(INPUT)" --output data/institutions.json
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # SYNC & BUILD / 同步和构建
