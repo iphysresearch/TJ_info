@@ -244,8 +244,8 @@ def find_by_doi(db: Dict[str, Any], doi: str) -> Optional[Dict[str, Any]]:
         doi = doi[18:]
 
     for entry in db.get('entries', []):
-        entry_doi = entry.get('doi', '').lower()
-        entry_id = entry.get('entry_id', '').lower()
+        entry_doi = (entry.get('doi') or '').lower()
+        entry_id = (entry.get('entry_id') or '').lower()
 
         if entry_doi == doi or entry_id == doi:
             return entry
@@ -268,8 +268,8 @@ def find_by_arxiv(db: Dict[str, Any], arxiv_id: str) -> Optional[Dict[str, Any]]
     clean_id = arxiv_id.split('v')[0].lower().strip()
 
     for entry in db.get('entries', []):
-        entry_arxiv = entry.get('arxiv_id', '').split('v')[0].lower()
-        entry_id = entry.get('entry_id', '').lower()
+        entry_arxiv = (entry.get('arxiv_id') or '').split('v')[0].lower()
+        entry_id = (entry.get('entry_id') or '').lower()
 
         if entry_arxiv == clean_id or entry_id == f"arxiv:{clean_id}":
             return entry

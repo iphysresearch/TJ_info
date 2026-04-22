@@ -8,7 +8,8 @@
         add-interactive find-citations-auto find-citations-dry update-citations \
         find-citations-doi find-citations-doi-auto find-citations-doi-dry \
         export-bibtex export-csv build full-update report stats check-deps clean \
-        fix-dates fix-authors import-institutions
+        fix-dates fix-dates-dry fix-authors fix-journals fix-journals-dry \
+        import-institutions
 
 # Default Python interpreter
 PYTHON ?= python3
@@ -62,7 +63,10 @@ help:
 	@echo "   make build            - Build static site / 构建静态站点"
 	@echo ""
 	@echo "🔧 Data Fixes / 数据修复"
-	@echo "   make fix-dates        - Fix paper dates via Crossref / 修复论文日期"
+	@echo "   make fix-journals     - Fill missing journal names via Crossref / 补全期刊名"
+	@echo "   make fix-journals-dry - Dry run for fix-journals / 预览期刊修复"
+	@echo "   make fix-dates        - Fix paper dates via arXiv/Crossref API / 修复论文日期"
+	@echo "   make fix-dates-dry    - Dry run for fix-dates / 预览日期修复"
 	@echo "   make fix-authors      - Expand abbreviated author names / 展开缩写作者名"
 	@echo ""
 	@echo "🏛️  Institutions / 成员单位"
@@ -213,9 +217,21 @@ export-csv:
 # ═══════════════════════════════════════════════════════════════════════════════
 # DATA FIXES / 数据修复
 # ═══════════════════════════════════════════════════════════════════════════════
+fix-journals:
+	@echo "📰 Fixing journal names..."
+	$(PYTHON) scripts/fix_journals.py
+
+fix-journals-dry:
+	@echo "📰 Dry run: fixing journal names..."
+	$(PYTHON) scripts/fix_journals.py --dry-run
+
 fix-dates:
 	@echo "📅 Fixing paper dates..."
 	$(PYTHON) scripts/fix_dates.py
+
+fix-dates-dry:
+	@echo "📅 Dry run: fixing paper dates..."
+	$(PYTHON) scripts/fix_dates.py --dry-run
 
 fix-authors:
 	@echo "👤 Fixing abbreviated author names..."

@@ -17,6 +17,7 @@ import json
 import csv
 import argparse
 import logging
+import time
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, Any, List, Tuple
@@ -129,7 +130,7 @@ class CitationFinder:
             True if already exists
         """
         # Check by DOI
-        external_ids = citation.get('external_ids', {})
+        external_ids = citation.get('external_ids') or {}
         doi = external_ids.get('DOI')
         if doi:
             if find_by_doi(self.db, doi):
@@ -143,27 +144,37 @@ class CitationFinder:
 
         return False
 
-    def add_citation_to_db(self, citation: Dict[str, Any]) -> Tuple[bool, str]:
+    def add_citation_to_db(self, citation: Dict[str, Any],
+                           fast_mode: bool = False) -> Tuple[bool, str]:
         """
         Add a citation to the database.
 
         Args:
             citation: Citation metadata from Semantic Scholar
+            fast_mode: If True, skip arXiv/Crossref API calls and use S2 data directly
 
         Returns:
             Tuple of (success, message)
         """
-        external_ids = citation.get('external_ids', {})
+        external_ids = citation.get('external_ids') or {}
         arxiv_id = external_ids.get('ArXiv')
         doi = external_ids.get('DOI')
 
-        # Try to get full metadata
-        if arxiv_id:
-            metadata = self.fetcher.fetch_by_arxiv(arxiv_id)
-        elif doi:
-            metadata = self.fetcher.fetch_by_doi(doi)
-        else:
-            # Use Semantic Scholar data directly
+        metadata = None
+
+        if not fast_mode:
+            # Try to get full metadata with error handling
+            try:
+                if arxiv_id:
+                    metadata = self.fetcher.fetch_by_arxiv(arxiv_id)
+                elif doi:
+                    metadata = self.fetcher.fetch_by_doi(doi)
+            except Exception as e:
+                logger.warning(f"Failed to fetch metadata: {e}")
+                metadata = None
+
+        # Fallback (or fast mode): Use Semantic Scholar data directly
+        if not metadata:
             metadata = {
                 'title': citation.get('title'),
                 'authors': citation.get('authors', []),
@@ -284,7 +295,7 @@ def display_citation(citation: Dict[str, Any], score: float, explanation: str,
     if len(authors) > 1:
         author_str += ' et al.'
 
-    external_ids = citation.get('external_ids', {})
+    external_ids = citation.get('external_ids') or {}
     doi = external_ids.get('DOI', '')
     arxiv = external_ids.get('ArXiv', '')
 
@@ -327,6 +338,8 @@ Examples:
                         help='Export results to CSV file')
     parser.add_argument('--json', type=Path,
                         help='Export results to JSON file')
+    parser.add_argument('--fast', action='store_true',
+                        help='Fast mode: use Semantic Scholar data directly, skip arXiv/Crossref API calls')
 
     args = parser.parse_args()
 
@@ -388,12 +401,18 @@ Examples:
 
         # Auto-add or prompt
         if args.auto and not args.dry_run:
-            success, message = finder.add_citation_to_db(citation)
-            if success:
-                print(f"    ✅ Added to database")
-                added_count += 1
-            else:
-                print(f"    ❌ Failed: {message}")
+            try:
+                success, message = finder.add_citation_to_db(citation, fast_mode=args.fast)
+                if success:
+                    print(f"    ✅ Added to database")
+                    added_count += 1
+                else:
+                    print(f"    ❌ Failed: {message}")
+                # Rate limiting: delay between API calls
+                time.sleep(0.5)
+            except Exception as e:
+                print(f"    ❌ Error: {e}")
+                time.sleep(1)  # Longer delay on error
 
         elif args.dry_run:
             print(f"    [DRY RUN] Would add to database")
@@ -425,13 +444,19 @@ Examples:
 
             if add_all == 'y':
                 for citation, score, explanation in new_papers:
-                    success, message = finder.add_citation_to_db(citation)
-                    title = citation.get('title', 'Unknown')[:50]
-                    if success:
-                        print(f"  ✅ {title}...")
-                        added_count += 1
-                    else:
-                        print(f"  ❌ {title}... ({message})")
+                    try:
+                        success, message = finder.add_citation_to_db(citation, fast_mode=args.fast)
+                        title = citation.get('title', 'Unknown')[:50]
+                        if success:
+                            print(f"  ✅ {title}...")
+                            added_count += 1
+                        else:
+                            print(f"  ❌ {title}... ({message})")
+                        time.sleep(0.5)  # Rate limiting
+                    except Exception as e:
+                        title = citation.get('title', 'Unknown')[:50]
+                        print(f"  ❌ {title}... (Error: {e})")
+                        time.sleep(1)
 
                 if added_count > 0:
                     finder.save_database()

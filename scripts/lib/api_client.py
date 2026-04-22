@@ -121,7 +121,7 @@ class ArxivClient(BaseAPIClient):
     """arXiv API client for paper metadata retrieval."""
 
     BASE_URL = "http://export.arxiv.org/api/query"
-    RATE_LIMIT_SECONDS = 3  # arXiv recommends 1 request per 3 seconds
+    RATE_LIMIT_SECONDS = 10  # arXiv rate limit (conservative to avoid 429)
 
     def __init__(self, cache_dir: Optional[Path] = None):
         super().__init__(cache_dir or Path("data/api_cache/arxiv"))

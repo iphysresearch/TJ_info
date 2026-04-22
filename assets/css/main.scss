@@ -181,47 +181,10 @@ a {
     }
 }
 
-// Publications controls - Simple
-.publications-controls {
-    margin-bottom: $spacing-md;
-    display: flex;
-    gap: $spacing-md;
-    flex-wrap: wrap;
-    align-items: center;
-
-    .filter-group {
-        display: flex;
-        align-items: center;
-        gap: $spacing-xs;
-
-        label {
-            font-weight: normal;
-        }
-
-        select, input[type="text"] {
-            font-family: $font-family;
-            font-size: $font-size;
-            padding: $spacing-xs $spacing-sm;
-            border: 1px solid $text;
-        }
-
-        input[type="text"] {
-            min-width: 200px;
-        }
-    }
-
-    button {
-        font-family: $font-family;
-        font-size: $font-size;
-        padding: $spacing-xs $spacing-sm;
-        border: 1px solid $text;
-        background-color: $background;
-        cursor: pointer;
-
-        &:hover {
-            background-color: $hover;
-        }
-    }
+// Full-width table wrapper (no max-width constraint)
+.table-full-width {
+    width: 100%;
+    padding: 0 $spacing-md;
 }
 
 // LIGO-style table
@@ -277,11 +240,6 @@ a {
             margin-right: $spacing-sm;
         }
     }
-}
-
-// DOI toggle button
-.doi-toggle {
-    margin-left: $spacing-md;
 }
 
 // Talks - Simple list style
@@ -383,17 +341,6 @@ a {
         .main-nav ul {
             flex-wrap: wrap;
             justify-content: center;
-        }
-    }
-
-    .publications-controls {
-        flex-direction: column;
-        align-items: stretch;
-
-        .filter-group {
-            input[type="text"] {
-                min-width: 100%;
-            }
         }
     }
 

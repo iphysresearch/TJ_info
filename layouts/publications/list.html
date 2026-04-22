@@ -2,34 +2,9 @@
 <div class="container">
     <h1>{{ .Title }}</h1>
     {{ .Content }}
+</div>
 
-    <div class="publications-controls">
-        <div class="filter-group">
-            <label for="year-filter">Year:</label>
-            <select id="year-filter">
-                <option value="">All Years</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label for="type-filter">Type:</label>
-            <select id="type-filter">
-                <option value="">All Types</option>
-                <option value="journal">Journal</option>
-                <option value="conference">Conference</option>
-                <option value="preprint">Preprint</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <input type="text" id="search-input" placeholder="Search publications...">
-        </div>
-        <div class="filter-group">
-            <button id="toggle-doi" class="doi-toggle">Show DOI</button>
-        </div>
-        <div class="filter-group">
-            <button id="export-bibtex">Export BibTeX</button>
-        </div>
-    </div>
-
+<div class="table-full-width">
     <div class="table-responsive">
         <table class="publications-table" id="publications-table">
             <thead>
@@ -43,14 +18,14 @@
             </thead>
             <tbody>
                 {{ range .Pages.ByDate.Reverse }}
-                <tr data-year="{{ .Date.Format "2006" }}" data-type="{{ .Params.publication_type }}" data-keywords="{{ delimit .Params.keywords "," }}">
+                <tr data-year="{{ .Date.Format "2006" }}" data-type="{{ .Params.publication_type }}">
                     <td data-sort-value="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</td>
                     <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
                     <td>{{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }}</td>
-                    <td>{{ with .Params.journal }}{{ . }}{{ if $.Params.volume }} {{ $.Params.volume }}{{ end }}{{ end }}</td>
+                    <td>{{ with .Params.journal_abbrev }}{{ . }}{{ else }}{{ with .Params.journal }}{{ . }}{{ end }}{{ end }}{{ with .Params.volume }} {{ . }}{{ end }}</td>
                     <td class="links-cell">
                         {{ with .Params.arxiv }}<a href="https://arxiv.org/abs/{{ . }}" target="_blank" rel="noopener">arXiv</a>{{ end }}
-                        {{ with .Params.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener" class="doi-link" style="display:none;">DOI</a>{{ end }}
+                        {{ with .Params.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI</a>{{ end }}
                     </td>
                 </tr>
                 {{ end }}
