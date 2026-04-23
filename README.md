@@ -2,6 +2,8 @@
 
 A static website showcasing publications and talks related to the Taiji space gravitational wave detection project. Built with Hugo and hosted on GitHub Pages.
 
+**Live Site**: https://iphysresearch.github.io/TJ_info/
+
 ## Overview
 
 This portal provides a comprehensive, searchable collection of:
@@ -24,7 +26,7 @@ This portal provides a comprehensive, searchable collection of:
 
 ### Viewing the Site
 
-Visit the live site at: [https://taiji-publications.github.io/](https://taiji-publications.github.io/)
+Visit the live site at: [https://iphysresearch.github.io/TJ_info/](https://iphysresearch.github.io/TJ_info/)
 
 ### Local Development
 
@@ -42,7 +44,7 @@ Visit the live site at: [https://taiji-publications.github.io/](https://taiji-pu
 
 2. Clone the repository:
    ```bash
-   git clone https://github.com/taiji-publications/TJ_info.git
+   git clone https://github.com/iphysresearch/TJ_info.git
    cd TJ_info
    ```
 
@@ -98,8 +100,8 @@ make serve             # Start dev server
 make build             # Build static site
 make sync              # Sync database to Hugo content
 
-# Workflows
-make deploy            # Full deploy: validate → sync → export → build
+# Deployment
+./deploy.sh            # Deploy to GitHub Pages (manual)
 
 # Institutions
 make import-institutions INPUT=file.xlsx  # Import institution data from Excel
@@ -205,6 +207,7 @@ TJ_info/
 │   ├── export_data.py    # Multi-format export
 │   └── validate_data.py  # Database validation
 ├── static/               # Static assets (images, downloads)
+├── deploy.sh             # Manual deployment script
 ├── Makefile              # Development commands
 ├── requirements.txt      # Python dependencies
 ├── hugo.toml             # Hugo configuration
@@ -215,7 +218,7 @@ TJ_info/
 
 - **Static Site Generator**: Hugo (extended)
 - **Styling**: Custom SCSS with LIGO-inspired design
-- **Deployment**: GitHub Pages via GitHub Actions
+- **Deployment**: GitHub Pages via manual `./deploy.sh` script
 - **Database**: JSON with Python management scripts
 - **Citation Tracking**: Semantic Scholar, Crossref, arXiv, INSPIRE-HEP APIs
 - **Validation**: Python scripts with JSON Schema
@@ -296,6 +299,14 @@ make build
 
 The generated site will be in the `public/` directory.
 
+### Deploying
+
+```bash
+./deploy.sh
+```
+
+This builds the site and pushes to the `gh-pages` branch.
+
 ## License
 
 This project is open source. Content contributions should be properly attributed to their original authors.
@@ -303,7 +314,7 @@ This project is open source. Content contributions should be properly attributed
 ## Contact
 
 For questions or issues, please:
-- Open an issue on GitHub
+- Open an issue on [GitHub](https://github.com/iphysresearch/TJ_info/issues)
 - Contact the maintainers
 
 ## Acknowledgments

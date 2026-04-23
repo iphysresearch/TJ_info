@@ -2,15 +2,15 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="/images/taiji-logo.svg" alt="Taiji Logo" class="footer-logo-image">
+                <img src="{{ "/images/taiji-logo.svg" | relURL }}" alt="Taiji Logo" class="footer-logo-image">
             </div>
             <div class="footer-info">
                 <p>&copy; {{ now.Year }} Taiji Collaboration. All rights reserved.</p>
                 <p>Hosted by <a href="https://ictp-ap.org/" target="_blank" rel="noopener">ICTP-AP</a></p>
             </div>
             <div class="footer-links">
-                <a href="https://github.com/taiji-publications" target="_blank" rel="noopener">GitHub</a> |
-                <a href="/contribute/">Contribute</a>
+                <a href="https://github.com/iphysresearch/TJ_info" target="_blank" rel="noopener">GitHub</a> |
+                <a href="{{ "/contribute/" | relURL }}">Contribute</a>
             </div>
         </div>
     </div>

@@ -2,15 +2,15 @@
     <div class="container">
         <div class="header-content">
             <div class="logo">
-                <a href="/">
-                    <img src="/images/taiji-logo.svg" alt="Taiji Logo" class="logo-image">
+                <a href="{{ "/" | relURL }}">
+                    <img src="{{ "/images/taiji-logo.svg" | relURL }}" alt="Taiji Logo" class="logo-image">
                     <span class="logo-text">{{ .Site.Params.logo.text }}</span>
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
                     {{ range .Site.Menus.main }}
-                    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                    <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
                     {{ end }}
                 </ul>
             </nav>

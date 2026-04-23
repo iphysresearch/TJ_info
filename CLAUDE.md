@@ -2,8 +2,8 @@
 
 **Project**: Taiji Publications & Talks Portal
 **Created**: 2025-04-09
-**Last Updated**: 2026-04-22
-**Status**: Institution Data System Added (v3.1.0)
+**Last Updated**: 2026-04-23
+**Status**: GitHub Pages Deployed (v3.2.0)
 
 ---
 
@@ -12,6 +12,8 @@
 ### English Version
 
 The Taiji Publications & Talks Portal is a static website built with Hugo to showcase publications and presentations related to the Taiji space gravitational wave detection project. The site is designed to be community-maintained through GitHub pull requests, with automated validation and deployment.
+
+**Live Site**: https://iphysresearch.github.io/TJ_info/
 
 **Key Objectives:**
 - Provide a centralized, searchable repository of Taiji-related publications
@@ -25,7 +27,7 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 **Technology Stack:**
 - **Static Site Generator**: Hugo (extended version)
 - **Styling**: Custom SCSS with LIGO-inspired minimal academic design
-- **Deployment**: GitHub Pages via GitHub Actions
+- **Deployment**: GitHub Pages via manual `./deploy.sh` script
 - **Validation**: Python scripts for JSON/YAML schema checking
 - **Data Format**: JSON database with Hugo content sync
 - **Citation Tracking**: Semantic Scholar, Crossref, arXiv, INSPIRE-HEP APIs
@@ -34,6 +36,8 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 ### 中文版本
 
 太极出版物与报告门户网站是一个使用Hugo构建的静态网站，用于展示与太极空间引力波探测项目相关的出版物和演讲。该网站设计为通过GitHub拉取请求进行社区维护，具有自动验证和部署功能。
+
+**在线网站**: https://iphysresearch.github.io/TJ_info/
 
 **主要目标：**
 - 提供太极相关出版物的集中、可搜索存储库
@@ -47,7 +51,7 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 **技术栈：**
 - **静态站点生成器**：Hugo（扩展版本）
 - **样式**：自定义SCSS，采用LIGO风格的简约学术设计
-- **部署**：通过GitHub Actions部署到GitHub Pages
+- **部署**：通过手动 `./deploy.sh` 脚本部署到 GitHub Pages
 - **验证**：用于JSON/YAML模式检查的Python脚本
 - **数据格式**：JSON数据库与Hugo内容同步
 - **引用追踪**：Semantic Scholar、Crossref、arXiv、INSPIRE-HEP API
@@ -98,7 +102,6 @@ The Taiji Publications & Talks Portal is a static website built with Hugo to sho
 TJ_info/
 ├── .github/
 │   ├── workflows/
-│   │   ├── hugo-build.yml          # Deploy to GitHub Pages
 │   │   └── validate-data.yml       # Validate PRs
 │   ├── ISSUE_TEMPLATE/
 │   │   ├── add-publication.md      # Publication submission template
@@ -189,6 +192,7 @@ TJ_info/
 │   ├── images/                     # Logo, favicon, etc.
 │   └── downloads/                  # Static files
 │
+├── deploy.sh                       # [NEW] Manual deployment script
 ├── Makefile                        # [NEW] Development commands
 ├── requirements.txt                # [NEW] Python dependencies
 ├── hugo.toml                       # Hugo configuration
@@ -444,8 +448,8 @@ make serve
 # Build for production
 make build
 
-# Full deployment workflow
-make deploy
+# Deploy to GitHub Pages (manual)
+./deploy.sh
 ```
 
 ### View the Site Locally
@@ -454,7 +458,7 @@ make deploy
 # Start development server
 hugo server -D
 
-# Visit http://localhost:1313
+# Visit http://localhost:1313/TJ_info/
 # Press Ctrl+C to stop
 ```
 
@@ -578,6 +582,30 @@ The site follows the LIGO Papers page design philosophy:
 ---
 
 ## Modification History
+
+### 2026-04-23: GitHub Pages Deployment (v3.2.0)
+
+**Deployment Setup:**
+- Deployed to https://iphysresearch.github.io/TJ_info/
+- Manual deployment via `./deploy.sh` script (GitHub Actions billing issue workaround)
+- Fixed relative URL issues for subdirectory deployment
+
+**New Files Created:**
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `deploy.sh` | ~19 | Manual deployment script to gh-pages branch |
+
+**Modified Files:**
+- `hugo.toml` — Updated baseURL to `https://iphysresearch.github.io/TJ_info/`
+- `layouts/partials/header.html` — Fixed logo and nav links with `relURL`
+- `layouts/partials/footer.html` — Fixed logo and links with `relURL`
+- `layouts/index.html` — Fixed home page links with `relURL`
+
+**Deployment Command:**
+```bash
+./deploy.sh
+```
 
 ### 2026-04-22: Institution Data System (v3.1.0)
 
@@ -812,7 +840,10 @@ make stats
 ## Contact & Support
 
 **Maintainers:**
-- GitHub: [@taiji-publications](https://github.com/taiji-publications)
+- GitHub: [@iphysresearch](https://github.com/iphysresearch)
+
+**Repository:**
+- https://github.com/iphysresearch/TJ_info
 
 **Resources:**
 - Hugo Documentation: https://gohugo.io/documentation/
@@ -840,6 +871,6 @@ This portal was developed for the Taiji Collaboration and is hosted by ICTP-AP (
 
 ---
 
-**Last Updated**: 2026-04-22
-**Version**: 3.1.0
-**Status**: Production Ready (Institution Data System)
+**Last Updated**: 2026-04-23
+**Version**: 3.2.0
+**Status**: Production Ready (GitHub Pages Deployed)
