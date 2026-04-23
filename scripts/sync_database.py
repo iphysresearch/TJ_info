@@ -680,7 +680,8 @@ def sync_database_to_hugo(dry_run: bool = False,
                 'publication_type': e.get('publication_type'),
                 'featured': e.get('featured', False),
                 'citation_count': e.get('citations', {}).get('count', 0),
-                'classification': e.get('classification', {})
+                'classification': e.get('classification', {}),
+                'published_date': e.get('published_date')
             } for e in entries]
         }
 
