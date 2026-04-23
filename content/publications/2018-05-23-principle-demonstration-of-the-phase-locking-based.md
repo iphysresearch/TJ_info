@@ -13,6 +13,7 @@ year: 2018
 doi: '10.1117/1.OE.57.5.054113'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

@@ -14,6 +14,7 @@ year: 2024
 doi: '10.1140/epjc/s10052-024-12841-3'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

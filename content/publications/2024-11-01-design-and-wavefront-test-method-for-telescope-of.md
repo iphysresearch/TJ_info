@@ -13,6 +13,7 @@ year: 2024
 doi: '10.1117/1.JATIS.10.4.044006'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

@@ -18,6 +18,7 @@ arxiv: '2502.11804'
 doi: '10.1103/jvkp-kvpk'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

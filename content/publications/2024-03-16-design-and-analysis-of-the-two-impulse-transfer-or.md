@@ -11,6 +11,7 @@ year: 2024
 doi: '10.3390/aerospace11030234'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

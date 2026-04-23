@@ -9,6 +9,7 @@ year: 2026
 doi: '10.1140/epjc/s10052-026-15433-5'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

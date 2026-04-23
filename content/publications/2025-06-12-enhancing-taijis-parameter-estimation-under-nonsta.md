@@ -12,6 +12,7 @@ arxiv: '2506.10599'
 doi: '10.1103/gpmh-1hqx'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

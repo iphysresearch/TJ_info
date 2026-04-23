@@ -11,6 +11,7 @@ year: 2026
 doi: '10.1016/j.optlastec.2025.114266'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

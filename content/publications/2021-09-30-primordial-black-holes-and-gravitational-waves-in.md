@@ -12,6 +12,7 @@ arxiv: '2109.14838'
 doi: '10.1016/j.nuclphysb.2022.115968'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

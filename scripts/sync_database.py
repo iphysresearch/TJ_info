@@ -532,6 +532,10 @@ def generate_frontmatter(entry: Dict[str, Any]) -> str:
     if citations.get('count', 0) > 0:
         lines.append(f'citation_count: {citations["count"]}')
 
+    # Taiji Collaboration flag
+    if entry.get('taiji_collaboration'):
+        lines.append('taiji_collaboration: true')
+
     lines.append('---')
 
     return '\n'.join(lines)
@@ -665,7 +669,7 @@ def sync_database_to_hugo(dry_run: bool = False,
         hugo_data_file = HUGO_DATA_PATH / "papers.json"
         hugo_data_file.parent.mkdir(parents=True, exist_ok=True)
 
-        # Create a simplified version for Hugo
+        # Create a simplified version for Hugo (preserve taiji_collaboration)
         hugo_data = {
             'metadata': db.get('metadata', {}),
             'entries': [{
@@ -681,7 +685,8 @@ def sync_database_to_hugo(dry_run: bool = False,
                 'featured': e.get('featured', False),
                 'citation_count': e.get('citations', {}).get('count', 0),
                 'classification': e.get('classification', {}),
-                'published_date': e.get('published_date')
+                'published_date': e.get('published_date'),
+                'taiji_collaboration': e.get('taiji_collaboration', False)
             } for e in entries]
         }
 

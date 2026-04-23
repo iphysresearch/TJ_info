@@ -10,6 +10,7 @@ year: 2024
 doi: '10.1103/physrevd.109.063520'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

@@ -36,6 +36,7 @@ year: 2025
 doi: '10.1103/physrevd.111.103023'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

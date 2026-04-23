@@ -10,6 +10,7 @@ arxiv: '2103.01923'
 doi: '10.1088/1475-7516/2021/05/044'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

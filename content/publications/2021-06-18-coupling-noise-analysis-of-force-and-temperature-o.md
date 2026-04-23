@@ -12,6 +12,7 @@ year: 2021
 doi: '10.1117/12.2599590'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

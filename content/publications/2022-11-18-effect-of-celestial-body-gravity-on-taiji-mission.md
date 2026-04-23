@@ -19,6 +19,7 @@ year: 2022
 doi: '10.1103/physrevd.106.102005'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

@@ -11,6 +11,7 @@ arxiv: '2507.09543'
 doi: '10.1103/bmh8-nyrw'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

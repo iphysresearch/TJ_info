@@ -11,6 +11,7 @@ arxiv: '2501.18380'
 doi: '10.1088/1475-7516/2025/04/044'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

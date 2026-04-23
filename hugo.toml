@@ -1,4 +1,4 @@
-baseURL = 'https://taiji-publications.github.io/'
+baseURL = 'https://iphysresearch.github.io/blog/'
 languageCode = 'en-us'
 title = 'Taiji Publications & Talks'
 theme = ''

@@ -12,6 +12,7 @@ year: 2023
 doi: '10.3390/machines11100948'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

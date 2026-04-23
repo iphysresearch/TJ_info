@@ -15,6 +15,48 @@ body {
     background-color: $background;
 }
 
+// Taiji Collaboration highlight
+.taiji-paper {
+    background-color: #ffcccb;  // Light coral/salmon
+}
+
+// Zebra stripes for table rows
+.publications-table tbody tr.row-even {
+    background-color: #f5f5f5;
+
+    .taiji-paper {
+        background-color: #f5cccb;  // Slightly darker coral for even rows
+    }
+}
+
+// Paper filter controls
+.paper-filter-controls {
+    margin-bottom: $spacing-md;
+    display: flex;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    cursor: pointer;
+
+    input[type="radio"] {
+        cursor: pointer;
+    }
+
+    .filter-label {
+        padding: 2px 8px;
+        border-radius: 3px;
+    }
+
+    .taiji-highlight {
+        background-color: #ffcccb;
+    }
+}
+
 // Container
 .container {
     max-width: $container-max-width;
@@ -225,7 +267,8 @@ a {
         border: 1px solid $border;
     }
 
-    tbody tr:nth-child(even) {
+    // Zebra stripes handled by JavaScript for filtered views
+    tbody tr.row-even {
         background-color: $table-alt-row;
     }
 

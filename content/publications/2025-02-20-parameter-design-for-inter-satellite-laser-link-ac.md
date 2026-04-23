@@ -14,6 +14,7 @@ year: 2025
 doi: '10.3390/rs17050738'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

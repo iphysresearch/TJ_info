@@ -15,6 +15,7 @@ year: 2020
 doi: '10.3390/aerospace7060067'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

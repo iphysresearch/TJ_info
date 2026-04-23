@@ -30,6 +30,7 @@ arxiv: '2505.19747'
 doi: '10.1007/s11433-025-2740-8'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

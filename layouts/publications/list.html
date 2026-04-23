@@ -2,6 +2,16 @@
 <div class="container">
     <h1>{{ .Title }}</h1>
     {{ .Content }}
+    <div class="paper-filter-controls">
+        <label class="filter-option">
+            <input type="radio" name="paper-filter" value="taiji" checked>
+            <span class="filter-label taiji-highlight">Taiji Collaboration Papers</span>
+        </label>
+        <label class="filter-option">
+            <input type="radio" name="paper-filter" value="all">
+            <span class="filter-label">All Papers (including citations)</span>
+        </label>
+    </div>
 </div>
 
 <div class="table-full-width">
@@ -18,9 +28,9 @@
             </thead>
             <tbody>
                 {{ range .Pages.ByDate.Reverse }}
-                <tr data-year="{{ .Date.Format "2006" }}" data-type="{{ .Params.publication_type }}">
+                <tr data-year="{{ .Date.Format "2006" }}" data-type="{{ .Params.publication_type }}"{{ if .Params.taiji_collaboration }} data-taiji="true"{{ end }}>
                     <td data-sort-value="{{ .Date.Format "2006-01-02" }}">{{ if eq (.Date.Format "02") "01" }}{{ .Date.Format "2006-01" }}{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}</td>
-                    <td><strong>{{ .Title }}</strong></td>
+                    <td{{ if .Params.taiji_collaboration }} class="taiji-paper"{{ end }}><strong>{{ .Title }}</strong></td>
                     <td>{{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }}</td>
                     <td>{{ $journal := "" }}{{ with .Params.journal_abbrev }}{{ $journal = . }}{{ else }}{{ with .Params.journal }}{{ $journal = . }}{{ end }}{{ end }}{{ with .Params.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">{{ $journal }}</a>{{ else }}{{ $journal }}{{ end }}{{ with .Params.volume }} {{ . }}{{ end }}</td>
                     <td class="links-cell">

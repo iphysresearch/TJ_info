@@ -11,6 +11,7 @@ arxiv: '2210.16143'
 doi: '10.1103/PhysRevD.107.104040'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

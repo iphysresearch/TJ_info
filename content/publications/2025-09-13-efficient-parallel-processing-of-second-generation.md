@@ -20,6 +20,7 @@ year: 2025
 doi: '10.3390/universe11090313'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

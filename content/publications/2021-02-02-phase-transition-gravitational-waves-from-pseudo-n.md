@@ -15,6 +15,7 @@ arxiv: '2102.01588'
 doi: '10.1007/JHEP05(2021)160'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

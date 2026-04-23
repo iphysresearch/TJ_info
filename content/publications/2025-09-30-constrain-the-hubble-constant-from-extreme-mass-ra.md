@@ -11,6 +11,7 @@ year: 2025
 doi: '10.3847/1538-4357/adfc3e'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

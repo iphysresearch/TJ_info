@@ -15,6 +15,7 @@ year: 2019
 doi: '10.3390/APP9102087'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

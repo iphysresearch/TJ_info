@@ -1,9 +1,10 @@
-// Table sorting and talks filtering functionality
+// Table sorting and filtering functionality
 document.addEventListener('DOMContentLoaded', function() {
     const table = document.getElementById('publications-table');
 
     if (table) {
-        const rows = table.querySelectorAll('tbody tr');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(table.querySelectorAll('tbody tr'));
 
         // Sorting functionality
         const headers = table.querySelectorAll('th[data-sort]');
@@ -15,10 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         function sortTable(sortKey) {
-            const tbody = table.querySelector('tbody');
-            const rowsArray = Array.from(rows);
+            const visibleRows = rows.filter(r => r.style.display !== 'none');
 
-            rowsArray.sort((a, b) => {
+            visibleRows.sort((a, b) => {
                 let aValue, bValue;
 
                 if (sortKey === 'date') {
@@ -33,8 +33,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
             });
 
-            rowsArray.forEach(row => tbody.appendChild(row));
+            visibleRows.forEach(row => tbody.appendChild(row));
+            applyZebraStripes();
         }
+
+        // Apply zebra stripes to visible rows
+        function applyZebraStripes() {
+            const visibleRows = rows.filter(r => r.style.display !== 'none');
+            visibleRows.forEach((row, index) => {
+                row.classList.toggle('row-even', index % 2 === 1);
+            });
+        }
+
+        // Paper filter (Taiji vs All)
+        const filterRadios = document.querySelectorAll('input[name="paper-filter"]');
+
+        function applyFilter(filterValue) {
+            rows.forEach(row => {
+                if (filterValue === 'taiji') {
+                    row.style.display = row.getAttribute('data-taiji') === 'true' ? '' : 'none';
+                } else {
+                    row.style.display = '';
+                }
+            });
+            applyZebraStripes();
+        }
+
+        // Apply default filter (taiji only)
+        applyFilter('taiji');
+
+        filterRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                applyFilter(this.value);
+            });
+        });
     }
 
     // Talks filtering

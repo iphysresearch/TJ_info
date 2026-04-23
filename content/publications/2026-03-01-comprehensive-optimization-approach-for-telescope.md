@@ -15,6 +15,7 @@ year: 2026
 doi: '10.1016/j.rineng.2026.109637'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

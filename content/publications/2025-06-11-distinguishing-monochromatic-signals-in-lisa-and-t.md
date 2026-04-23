@@ -13,6 +13,7 @@ arxiv: '2506.09744'
 doi: '10.1103/xlqy-r6n3'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

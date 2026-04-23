@@ -19,6 +19,7 @@ year: 2024
 doi: '10.1016/j.measurement.2024.114341'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 

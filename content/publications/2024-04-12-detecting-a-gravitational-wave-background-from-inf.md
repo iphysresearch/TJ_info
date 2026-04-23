@@ -11,6 +11,7 @@ arxiv: '2404.08375'
 doi: '10.1140/epjc/s10052-024-13529-4'
 publication_type: 'preprint'
 featured: false
+taiji_collaboration: true
 ---
 
 

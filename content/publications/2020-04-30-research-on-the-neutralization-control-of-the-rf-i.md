@@ -15,6 +15,7 @@ year: 2020
 doi: '10.1088/2058-6272/ab7dd5'
 publication_type: 'journal'
 featured: false
+taiji_collaboration: true
 ---
 
 
